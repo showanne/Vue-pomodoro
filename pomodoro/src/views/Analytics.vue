@@ -1,3 +1,3 @@
 <template lang="pug">
-  #home
+  #analytics analytics
 </template>
