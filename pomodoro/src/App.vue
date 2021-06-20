@@ -1,6 +1,6 @@
 <template lang="pug">
-  #app
-    b-navbar(toggable='lg' type='dark' variant='dark')
+  #app.bgPrimary.textSecondary
+    b-navbar(toggable='lg' type='dark').bgPrimary.textSecondary
       b-container
         b-navbar-brand(to='/') 番茄鐘 Pomodoro Logo
         b-navbar-toggle(target='navbar-collapse')
