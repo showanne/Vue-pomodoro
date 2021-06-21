@@ -33,8 +33,9 @@ export default new Vuex.Store({
     addList (state, data) {
       // state.list.push(data)
       state.list.push({
+        check: false,
         name: data,
-        time: '',
+        time: new Date().toLocaleDateString('zh-tw'), // "2021/6/21"
         edit: false,
         model: data
       })

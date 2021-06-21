@@ -3,7 +3,44 @@
     b-container.pt-5
       b-row
         b-col(cols='6').p-3
-          h1.mb-2 新增事項
+          //- h1.mb-2 待辦清單
+          b-table(:items='list' :fields='listfields').textSecondary
+            template(#cell(check)='data')
+              input(type='checkbox' v-model='data.item.check')
+            template(#cell(name)='data')
+              b-form-input(
+                v-if='data.item.edit'
+                v-model='data.item.model'
+                trim
+                :state='data.item.state'
+                @dblclick='data.item.edit=true'
+                @keydown.enter='changelist(data.index)'
+                @keydown.esc='cancellist(data.index)'
+              )
+              //- 雙擊欄位開啟編輯模式 @dblclick='editlist(data.index)'
+              span(v-else) {{ data.value }}
+            template(#cell(edit)='data')
+              //- 如果不是編輯模式 顯示
+              span(v-if='!data.item.edit')
+                b-btn(@click='editlist(data.index)').bgNone.bdNone.rounded-circle.px-1.py-0
+                  font-awesome-icon(:icon='["fas", "pen"]').btn-font
+                b-btn(@click='dellist(data.index)').bgNone.bdNone.rounded-circle.px-1.py-0.actionBtn
+                  img(:src='require("../assets/img/ic_remove_circle_outline-A.png")')
+              //- 如果是編輯模式 顯示
+              span(v-else)
+                b-btn(@click='changelist(data.index)').bgNone.bdNone.rounded-circle.px-1.py-0
+                  font-awesome-icon(:icon='["fas", "check"]').btn-font
+                b-btn(@click='cancellist(data.index)').bgNone.bdNone.rounded-circle.px-1.py-0
+                  font-awesome-icon(:icon='["fas", "undo"]').btn-font
+            template(#cell(action)='data')
+              b-btn(@click='').bgNone.bdNone.rounded-circle.px-1.py-0.actionBtn
+                img(:src='require("../assets/img/ic_keyboard_arrow_up-A.png")')
+              b-btn(@click='').bgNone.bdNone.rounded-circle.px-1.py-0.actionBtn
+                img(:src='require("../assets/img/ic_keyboard_arrow_down-A.png")')
+              b-btn(@click='').bgNone.bdNone.rounded-circle.px-1.py-0.actionBtn
+                img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
+        b-col(cols='6').p-3.text-right
+          //- h1.mb-2.text-left 新增事項
           b-form-group(invalid-feedback='請至少輸入 2 個字' :state='state')
             //- invalid-feedback='' 驗證訊息文字
             //- :state='' 驗證狀態判斷
@@ -11,40 +48,10 @@
               v-model='newitem'
               :state='state'
               trim
-              placeholder="Enter your todo"
+              placeholder="Task..."
               @keydown.enter='additem'
-              )
-          b-btn(@click='additem').bgSecondary.textPrimary 新增 icon
-        b-col(cols='6').p-3
-          h1.mb-2 待辦清單
-          b-table(:items='list' :fields='listfields').textSecondary
-            template(#cell(name)='data')
-              b-form-input(
-                v-if='data.item.edit'
-                v-model='data.item.model'
-                trim
-                :state='data.item.state'
-                @keydown.enter='changelist(data.index)'
-                @keydown.esc='cancellist(data.index)'
-              )
-              span(v-else) {{ data.value }}
-            template(#cell(edit)='data')
-              //- 如果不是編輯模式 顯示
-              span(v-if='!data.item.edit')
-                b-btn(@click='editlist(data.index)').bgSecondary.textPrimary
-                  font-awesome-icon(:icon='["fas", "pen"]').h6
-                b-btn(@click='dellist(data.index)').bgSecondary-dark.textPrimary
-                  font-awesome-icon(:icon='["fas", "trash"]').h6
-              //- 如果是編輯模式 顯示
-              span(v-else)
-                b-btn(@click='changelist(data.index)').bgSecondary.textPrimary
-                  font-awesome-icon(:icon='["fas", "check"]').h6
-                b-btn(@click='cancellist(data.index)').bgSecondary.textPrimary
-                  font-awesome-icon(:icon='["fas", "undo"]').h6
-            template(#cell(action)='data')
-              b-btn(@click='').bgSecondary.textPrimary 上移 icon
-              b-btn(@click='').bgSecondary.textPrimary 下移 icon
-              b-btn(@click='').bgSecondary.textPrimary 左移 icon
+              ).taskInput
+          b-btn(@click='additem').bgSecondary.textPrimary.taskBtn Add task
 </template>
 
 <script>
@@ -54,6 +61,7 @@ export default {
     return {
       newitem: '',
       listfields: [
+        { key: 'check', label: '勾選' },
         { key: 'name', label: '名稱' },
         { key: 'time', label: '新增時間' },
         { key: 'edit', label: '編輯' },

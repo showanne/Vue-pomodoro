@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="30" viewBox="0 0 45 30"><defs><style>.a{fill:#caceac;}</style></defs><g transform="translate(0 0)"><g transform="translate(0 0)"><path class="a" d="M29.714,20.571H4v4.286H29.714Zm0-8.571H4v4.286H29.714ZM4,33.429H21.143V29.143H4Zm41.786-9.643L49,27,34.011,42l-9.654-9.643,3.214-3.214,6.439,6.429Z" transform="translate(-4 -12)"/></g></g></svg>
+<!-- 
+  svg(xmlns='http://www.w3.org/2000/svg' width='45' height='30' viewBox='0 0 45 30')
+    defs
+      style .a{fill:#caceac;}
+    g(transform='translate(0 0)')
+      g(transform='translate(0 0)')
+        path.a(d='M29.714,20.571H4v4.286H29.714Zm0-8.571H4v4.286H29.714ZM4,33.429H21.143V29.143H4Zm41.786-9.643L49,27,34.011,42l-9.654-9.643,3.214-3.214,6.439,6.429Z' transform='translate(-4 -12)')
+-->

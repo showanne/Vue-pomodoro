@@ -14,7 +14,7 @@
             template(#cell(select)='data')
               font-awesome-icon(:icon='["fas", "check"]' v-if='sound === data.item.src')
             template(#cell(src)='data')
-              audio(controls :src='require("../assets/"+data.value)')
+              audio(controls :src='require("../assets/mp3/"+data.value)')
 </template>
 
 <script>
