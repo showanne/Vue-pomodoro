@@ -3,10 +3,17 @@
 // @import "../node_modules/bootstrap/scss/functions"
 // @import "../node_modules/bootstrap/scss/bootstrap"
 
+// embed a googlefont
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+*
+  font-family 'Arimo', sans-serif
+
 .textPrimary
   color #0a3125
 .textSecondary
   color #caceac
+  fill #caceac
 .textPrimary-dark
   color #061f17
 .textSecondary-dark
@@ -24,14 +31,87 @@
   background-color #81846e
 .bgMute
   background-color #407061
+.bgNone
+  background-color transparent
 
 .bdPrimary
   border-color #0a3125
 .bdSecondary
   border-color #caceac
+.bdMute
+  border-color #407061
 .bdNone
   border-color transparent
 
 // For App.vue b-navbar
 .navbar-dark, .navbar-dark .navbar-brand ,.navbar-dark .navbar-nav .nav-link
   color #caceac
+.h-nav
+  height 110px
+.nav-img
+  width 80px
+  height 110px
+  padding 2.5rem 0.5rem 0.5rem 0.5rem
+  transition 0.5s
+.nav-img:hover
+  background-color #061f17
+.nav-img a
+  margin-top auto
+
+// For List.vue
+.table th,
+.table td
+  // padding 0.75rem 0.85rem?
+  // vertical-align top
+  border-top 1px solid #407061
+
+.table thead:nth-child(1) th
+  border-top unset
+
+.table thead th
+  // vertical-align bottom
+  border-bottom 1px solid #407061
+
+.table tbody + tbody
+  border-top 1px solid #407061
+
+.btn-font
+  font-weight 200
+  color #407061
+  font-size 0.8rem
+.btn:hover
+  background-color #caceacac
+.actionBtn img
+  width 15px
+  height 15px
+.actionBtn:hover
+  background-color #061f17
+  border-color transparent
+.taskInput
+  // width 410px
+  height 50px
+  background #0A3125 0% 0% no-repeat padding-box
+  border 1px solid #CACEAC
+  border-radius 4px
+.taskInput::placeholder
+  font italic normal normal 18px/21px Arimo
+  // font：font-style font-weight font-size/line-height font-family
+  letter-spacing 0px
+  color #407061
+.taskInput:focus 
+    color #caceac
+    background-color transparent
+    border-color #caceac
+    box-shadow none
+.taskBtn
+  width 155px
+  height 40px
+  font: normal normal normal 20px/23px Arimo;
+  text-transform capitalize
+  background #CACEAC 0% 0% no-repeat padding-box
+  border-radius 4px
+
+// For Analytics.vue
+.font-analytics
+  font normal normal bold 40px/45px Arimo
+  text-transform capitalize

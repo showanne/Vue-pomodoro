@@ -11,13 +11,13 @@
           .button.my-3
             b-btn.mx-2.bgPrimary.textSecondary.bdNone(v-if='status !== 1')
               //- 如果不是在倒數狀態時，出現播放按鈕
-              font-awesome-icon(:icon='["fas", "play"]')
+              font-awesome-icon(:icon='["fas", "play"]').btn-font
             b-btn.mx-2.bgPrimary.textSecondary.bdNone(v-if='status === 1')
               //- 如果是在倒數狀態時，出現暫停按鈕
-              font-awesome-icon(:icon='["fas", "pause"]')
+              font-awesome-icon(:icon='["fas", "pause"]').btn-font
             b-btn.mx-2.bgPrimary.textSecondary.bdNone(v-if='current.length > 0')
               //- 如果現在倒數數字長度大於0時，出現跳過按鈕
-              font-awesome-icon(:icon='["fas", "step-forward"]')
+              font-awesome-icon(:icon='["fas", "step-forward"]').btn-font
         b-col(cols='4')
           h1 待辦
 </template>
