@@ -63,7 +63,7 @@ export default {
       listfields: [
         { key: 'check', label: '勾選' },
         { key: 'name', label: '名稱' },
-        { key: 'time', label: '新增時間' },
+        { key: 'date', label: '新增日期' },
         { key: 'edit', label: '編輯' },
         { key: 'action', label: '操作' }
 
