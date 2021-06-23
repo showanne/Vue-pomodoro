@@ -6,6 +6,8 @@
 // embed a googlefont
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
+$theme-colors = map-merge(("primary": #0a3125, "secondary": #caceac, "primary-dark": #061f17, "secondary-dark": #81846e, "Mute": #407061, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "light": $light, "dark": $dark), $theme-colors)
+
 *
   font-family 'Arimo', sans-serif
 
@@ -42,6 +44,11 @@
   border-color #407061
 .bdNone
   border-color transparent
+
+// For All
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover
+  border-color unset 
+
 
 // For App.vue b-navbar
 .navbar-dark, .navbar-dark .navbar-brand ,.navbar-dark .navbar-nav .nav-link

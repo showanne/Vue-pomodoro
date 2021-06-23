@@ -11,7 +11,25 @@ const routes = [
     component: Home,
     meta: {
       title: '番茄鐘'
-    }
+    },
+    children: [
+      {
+        path: '/',
+        name: 'HomePomodoro',
+        component: () => import(/* webpackChunkName: "home-Pomodoro" */ '../views/HomePomodoro.vue'),
+        meta: {
+          title: '番茄鐘'
+        }
+      },
+      {
+        path: 'shortbreak',
+        name: 'HomeShortBreak',
+        component: () => import(/* webpackChunkName: "home-ShortBreak" */ '../views/HomeShortBreak.vue'),
+        meta: {
+          title: '番茄鐘'
+        }
+      }
+    ]
   },
   //   每開一個新分頁要設定
   // {
@@ -29,7 +47,25 @@ const routes = [
     component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
     meta: {
       title: '番茄鐘 | 待辦清單'
-    }
+    },
+    children: [
+      {
+        path: '/',
+        name: 'ListTodo',
+        component: () => import(/* webpackChunkName: "list-Todo" */ '../views/ListTodo.vue'),
+        meta: {
+          title: '番茄鐘 | 待辦清單'
+        }
+      },
+      {
+        path: 'done',
+        name: 'ListDone',
+        component: () => import(/* webpackChunkName: "list-Done" */ '../views/ListDone.vue'),
+        meta: {
+          title: '番茄鐘 | 待辦清單'
+        }
+      }
+    ]
   },
   {
     path: '/analytics',
@@ -37,7 +73,25 @@ const routes = [
     component: () => import(/* webpackChunkName: "analytics" */ '../views/Analytics.vue'),
     meta: {
       title: '番茄鐘 | 分析'
-    }
+    },
+    children: [
+      {
+        path: '/',
+        name: 'AnalyticsToday',
+        component: () => import(/* webpackChunkName: "analytics-Today" */ '../views/AnalyticsToday.vue'),
+        meta: {
+          title: '番茄鐘 | 分析'
+        }
+      },
+      {
+        path: 'weekly',
+        name: 'AnalyticsWeekly',
+        component: () => import(/* webpackChunkName: "analytics-Weekly" */ '../views/AnalyticsWeekly.vue'),
+        meta: {
+          title: '番茄鐘 | 分析'
+        }
+      }
+    ]
   },
   {
     path: '/settings',
