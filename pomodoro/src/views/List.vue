@@ -4,7 +4,7 @@
       b-row
         b-col(cols='6').p-3
           //- h1.mb-2 待辦清單
-          b-table(:items='list' :fields='listfields')
+          b-table(:items='list' :fields='listfields').text-secondary
             template(#cell(check)='data')
               input(type='checkbox' v-model='data.item.check')
             template(#cell(name)='data')
@@ -22,22 +22,22 @@
             template(#cell(edit)='data')
               //- 如果不是編輯模式 顯示
               span(v-if='!data.item.edit')
-                b-btn(@click='editlist(data.index)').rounded-circle.px-1.py-0
-                  font-awesome-icon(:icon='["fas", "pen"]').btn-font
-                b-btn(@click='dellist(data.index)').rounded-circle.px-1.py-0.actionBtn
+                b-btn(variant="primary" @click='editlist(data.index)').rounded-circle.px-1.py-0
+                  font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
+                b-btn(variant="primary" @click='dellist(data.index)').rounded-circle.px-1.py-0.actionBtn
                   img(:src='require("../assets/img/ic_remove_circle_outline-A.png")')
               //- 如果是編輯模式 顯示
               span(v-else)
-                b-btn(@click='changelist(data.index)').rounded-circle.px-1.py-0
+                b-btn(variant="primary" @click='changelist(data.index)').rounded-circle.px-1.py-0
                   font-awesome-icon(:icon='["fas", "check"]').btn-font
-                b-btn(@click='cancellist(data.index)').rounded-circle.px-1.py-0
+                b-btn(variant="primary" @click='cancellist(data.index)').rounded-circle.px-1.py-0
                   font-awesome-icon(:icon='["fas", "undo"]').btn-font
             template(#cell(action)='data')
-              b-btn(@click='').rounded-circle.px-1.py-0.actionBtn
+              b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                 img(:src='require("../assets/img/ic_keyboard_arrow_up-A.png")')
-              b-btn(@click='').rounded-circle.px-1.py-0.actionBtn
+              b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                 img(:src='require("../assets/img/ic_keyboard_arrow_down-A.png")')
-              b-btn(@click='').rounded-circle.px-1.py-0.actionBtn
+              b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                 img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
@@ -51,7 +51,7 @@
               placeholder="Task..."
               @keydown.enter='additem'
               ).taskInput
-          b-btn(@click='additem').taskBtn Add task
+          b-btn(variant="secondary" @click='additem').taskBtn Add task
 </template>
 
 <script>
