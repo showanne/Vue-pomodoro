@@ -1,21 +1,21 @@
 <template lang="pug">
-  #home.vh-100
-    b-container.pt-5
+  #home
+    b-container.vh-100
       b-row
         b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
           //- h1 到計時文字
           h1.my-5.align-middle {{ timeText }}
-          b-btn.my-3.bgSecondary.textPrimary.bdPrimary {{ currentText }}
+          b-btn.my-3 {{ currentText }}
           br
-          b-btn.my-3.bgPrimary.textSecondary.bdSecondary Choose Task
+          b-btn.my-3 Choose Task
           .button.my-3
-            b-btn.mx-2.bgPrimary.textSecondary.bdNone(v-if='status !== 1')
+            b-btn(v-if='status !== 1').mx-2
               //- 如果不是在倒數狀態時，出現播放按鈕
               font-awesome-icon(:icon='["fas", "play"]').btn-font
-            b-btn.mx-2.bgPrimary.textSecondary.bdNone(v-if='status === 1')
+            b-btn(v-if='status === 1').mx-2
               //- 如果是在倒數狀態時，出現暫停按鈕
               font-awesome-icon(:icon='["fas", "pause"]').btn-font
-            b-btn.mx-2.bgPrimary.textSecondary.bdNone(v-if='current.length > 0')
+            b-btn(v-if='current.length > 0').mx-2
               //- 如果現在倒數數字長度大於0時，出現跳過按鈕
               font-awesome-icon(:icon='["fas", "step-forward"]').btn-font
         b-col(cols='4')

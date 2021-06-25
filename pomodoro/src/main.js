@@ -9,6 +9,7 @@ import store from './store'
 // 引用 自行變動部分 BS 變數後的檔案，暫時無法引用因為 stylus 與 scss 格式不同會報錯
 // import './style/_variables.scss'
 // 引用 自己的 style
+import './style/all.css'
 import './style/style.styl'
 
 // FontAwesome 必要引用

@@ -1,6 +1,6 @@
 <template lang="pug">
-  #analytics.vh-100
-    b-container
+  #analytics
+    b-container.vh-100
         b-row
           b-col(cols='12')
             b-card(title='Card Title' no-body).bg-transparent

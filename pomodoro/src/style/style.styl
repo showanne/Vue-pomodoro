@@ -6,46 +6,48 @@
 // embed a googlefont
 @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
-$theme-colors = map-merge(("primary": #0a3125, "secondary": #caceac, "primary-dark": #061f17, "secondary-dark": #81846e, "Mute": #407061, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "light": $light, "dark": $dark), $theme-colors)
-
 *
   font-family 'Arimo', sans-serif
 
-.textPrimary
-  color #0a3125
-.textSecondary
-  color #caceac
-  fill #caceac
-.textPrimary-dark
-  color #061f17
-.textSecondary-dark
-  color #81846e
-.textMute
-  color #407061
+// .textPrimary
+//   color #0a3125
+// .textSecondary
+//   color #caceac
+//   fill #caceac
+// .textPrimary-dark
+//   color #061f17
+// .textSecondary-dark
+//   color #81846e
+// .textMute
+//   color #407061
 
-.bgPrimary
-  background-color #0a3125
-.bgSecondary
-  background-color #caceac
-.bgPrimary-dark
-  background-color #061f17
-.bgSecondary-dark
-  background-color #81846e
-.bgMute
-  background-color #407061
-.bgNone
-  background-color transparent
+// .bgPrimary
+//   background-color #0a3125
+// .bgSecondary
+//   background-color #caceac
+// .bgPrimary-dark
+//   background-color #061f17
+// .bgSecondary-dark
+//   background-color #81846e
+// .bgMute
+//   background-color #407061
+// .bgNone
+//   background-color transparent
 
-.bdPrimary
-  border-color #0a3125
-.bdSecondary
-  border-color #caceac
-.bdMute
-  border-color #407061
-.bdNone
-  border-color transparent
+// .bdPrimary
+//   border-color #0a3125
+// .bdSecondary
+//   border-color #caceac
+// .bdMute
+//   border-color #407061
+// .bdNone
+//   border-color transparent
 
 // For All
+.m-nav
+  margin-top 110px
+.vh-100
+  height calc(100vh - 110px) !important
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover
   border-color unset 
 
