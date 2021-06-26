@@ -33,11 +33,46 @@ export default new Vuex.Store({
     addList (state, data) {
       // state.list.push(data)
       state.list.push({
+        // 待辦事項                                       [資料庫欄位]
+        todo: data,
+        // 新增待辦事項的日期 "2021/6/21"，由系統自行帶入  [資料庫欄位]
+        date: new Date().toLocaleDateString('zh-tw'),
+        // 期限                                            [資料庫欄位]
+        deadline: '',
+        // 是否已完成 預設為 false                         [資料庫欄位]
         check: false,
-        name: data,
-        date: new Date().toLocaleDateString('zh-tw'), // "2021/6/21"
+        // 是否在編輯 預設為 false
         edit: false,
-        model: data
+        // 編輯前的待辦事項
+        todoEdit: data,
+
+        // 次數，由系統計入一個待辦事項做了幾次             [資料庫欄位]
+        // Analytics 和 List 頁面 todo 下方的圓點
+        times: 0
+
+        // 次數-做了幾次番茄鐘，由系統計次
+        // Analytics 頁面 Today 的 Pomodoro 值
+        // timesPomodoro: 0
+
+        // 次數-當天有幾個待辦事項，由系統計次
+        // Analytics 頁面 Today 的 Task 值
+        // timesTodo: 0
+
+        // 完成個數，由系統計入完成了幾個待辦事項
+        // 應該是計算 check:true 的數量
+        // Analytics 頁面 Today 的 Complete 值
+        // complete: 0
+
+        // 一個待辦事項所花費的時間
+        // 應該是計算該事項 times 的數量去乘 25min
+        // Analytics 頁面 todo 旁的時間
+        // timeTodo: 0
+
+        // 當天做待辦事項所花費的時間 = 專注的時間
+        // Analytics 頁面 Today 的 Focus time 值
+        // timeFocus: 0
+
+        // 假如是一周的計算，不知道是不是可以用單天的相加，或是需要另設變數?
       })
     },
     editList (state, data) {
@@ -47,11 +82,11 @@ export default new Vuex.Store({
       state.list.splice(data, 1)
     },
     changeList (state, data) {
-      state.list[data].name = state.list[data].model
+      state.list[data].todo = state.list[data].todoEdit
       state.list[data].edit = false
     },
     canceLlist (state, data) {
-      state.list[data].model = state.list[data].name
+      state.list[data].todoEdit = state.list[data].todo
       state.list[data].edit = false
     }
   },

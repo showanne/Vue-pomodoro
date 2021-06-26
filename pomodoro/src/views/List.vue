@@ -7,10 +7,10 @@
           b-table(:items='list' :fields='listfields').text-secondary
             template(#cell(check)='data')
               input(type='checkbox' v-model='data.item.check')
-            template(#cell(name)='data')
+            template(#cell(todo)='data')
               b-form-input(
                 v-if='data.item.edit'
-                v-model='data.item.model'
+                v-model='data.item.todoEdit'
                 trim
                 :state='data.item.state'
                 @dblclick='data.item.edit=true'
@@ -62,11 +62,10 @@ export default {
       newitem: '',
       listfields: [
         { key: 'check', label: '勾選' },
-        { key: 'name', label: '名稱' },
+        { key: 'todo', label: '待辦事項' },
         { key: 'date', label: '新增日期' },
         { key: 'edit', label: '編輯' },
         { key: 'action', label: '操作' }
-
       ]
     }
   },
@@ -87,7 +86,7 @@ export default {
     // 新增清單顯示
     list () {
       return this.$store.getters.list.map(item => {
-        if (item.model.length < 2) {
+        if (item.todoEdit.length < 2) {
           item.state = false
         } else {
           item.state = true
