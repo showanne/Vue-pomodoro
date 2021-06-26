@@ -7,7 +7,12 @@ import pomodoroDataRoute from './routes/pomodoroData.js'
 
 dotenv.config()
 
-mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+// 為了解決警示訊息
+mongoose.connect(process.env.MONGO, { 
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+mongoose.set('useFindAndModify', false)
 
 const app = express()
 
