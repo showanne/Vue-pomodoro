@@ -2,6 +2,10 @@ import pomodoroData from '../models/pomodoroData.js'
 
 // 新增
 export const createlist = async (req, res) => {
+  if (!req.headers['content-type'] || !req.headers['content-type'].includes('application/json')) {
+    res.status(400).send({ success: false, message: '資料格式錯誤' })
+    return
+  }
   try {
     let result = await pomodoroData.create(req.body)
     // .toObject() 將回傳的 Mongoose Document(Mongoose 特有格式，非JSON物件) 格式轉為 JS 格式才能進行相關操作
@@ -9,7 +13,6 @@ export const createlist = async (req, res) => {
     // 回傳時 刪除某(ex:times)欄位 顯示
     // delete result.times
     res.status(200).send({ success:true, message: '', result })
-    console.log('createlist');
   } catch (error) {
     // 驗證錯誤時的訊息
     if (error.name === 'ValidationError' ) {
@@ -20,23 +23,24 @@ export const createlist = async (req, res) => {
       res.status(500).send({success: false, message: '伺服器錯誤'})
     }
   }
+  console.log('createlist');
 }
 
-// 查 所有欄位
+// 查詢 所有欄位
 export const getlists = async (req, res) => {
   try {
     // .find({查詢條件}, '回傳欄位')
     // 回傳欄位以空白分隔，  - 代表不要指定欄位，沒有 - 代表指定欄位
     const result = await pomodoroData.find()
     res.status(200).send({ success:true, message: '', result })
-    console.log('getlists');
   } catch (error) {
     res.status(500).send({success: false, message: '伺服器錯誤'})
   }
+  console.log('getlists');
 }
 
 
-// 查 指定欄位
+// 查詢 指定欄位
 export const getlistsTodo = async (req, res) => {
   // try {
   //   // .find({查詢條件}, '回傳欄位')
@@ -49,7 +53,8 @@ export const getlistsTodo = async (req, res) => {
   console.log('getlistsTodo');
 }
 
-// 查 單一欄位 用 id 
+
+// 查詢 單一欄位 用 id 
 export const getlist = async (req, res) => {
   try {
     // .findById(req.params.id, '-date') '- ...' 指定不要什麼欄位
@@ -57,17 +62,17 @@ export const getlist = async (req, res) => {
     if (result) {
       res.status(200).send({ success:true, message: '', result })
     } else {
-      res.status(404).send({ success:false, message: '查無使用者' })
+      res.status(404).send({ success:false, message: '查無此待辦事項' })
     }
-    console.log('getlist');
   } catch (error) {
     // 'CastError' id 格式不符時，會回傳的錯誤
     if (error.name === 'CastError') {
-      res.status(404).send({ success:false, message: '查無使用者' })
+      res.status(404).send({ success:false, message: '查無此待辦事項' })
     } else {
       res.status(500).send({success: false, message: '伺服器錯誤'})
     }
   }
+  console.log('getlist');
 }
 
 // 修改某 id 的欄位
@@ -83,13 +88,12 @@ export const updatelist = async (req, res) => {
       // delete result.times
       res.status(200).send({ success:true, message: '', result })
     } else {
-      res.status(404).send({ success:false, message: '查無使用者' })
+      res.status(404).send({ success:false, message: '查無此待辦事項' })
     }
-    console.log('updatelist');
   } catch (error) {
     // 'CastError' id 格式不符時，會回傳的錯誤
     if (error.name === 'CastError') {
-      res.status(404).send({ success:false, message: '查無使用者' })
+      res.status(404).send({ success:false, message: '查無此待辦事項' })
     } else if (error.name === 'ValidationError' ) {
       // 驗證錯誤時的訊息
       const key = Object.keys(error.errors)[0]
@@ -99,4 +103,28 @@ export const updatelist = async (req, res) => {
       res.status(500).send({success: false, message: '伺服器錯誤'})
     }
   }
+    console.log('updatelist');
+}
+
+// 刪除某 id 的欄位
+export const dellist = async (req, res) => {
+  try {
+    // .findByIdAndDelete 找到某 ID 去刪除欄位
+    const result = await pomodoroData.findByIdAndDelete(req.params.id)
+    if (result) {
+      // 結尾不須加 result 因為刪除後不用回傳資料
+      res.status(200).send({ success:true, message: '成功刪除' })
+    } else {
+      res.status(404).send({ success:false, message: '查無此待辦事項' })
+    }
+  } catch (error) {
+    // 'CastError' id 格式不符時，會回傳的錯誤
+    if (error.name === 'CastError') {
+      res.status(404).send({ success:false, message: '查無此待辦事項' })
+    } else {
+      res.status(500).send({success: false, message: '伺服器錯誤'})
+    }
+  }
+  console.log('dellist');
+
 }
