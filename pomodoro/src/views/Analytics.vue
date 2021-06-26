@@ -9,9 +9,9 @@
                   b-col(cols='6')
                     b-nav(card-header tabs).align-items-end
                       //-  <b-nav-item>'s with child routes. Note the trailing slash on the first <b-nav-item>
-                      b-navbar-brand.h1.mr-auto.textSecondary.font-analytics  analytics
-                      b-nav-item(to='/analytics/').textMute Today
-                      b-nav-item(to='/analytics/weekly').textMute Weekly
+                      b-navbar-brand.h1.mr-auto.font-analytics  analytics
+                      b-nav-item(to='/analytics/') Today
+                      b-nav-item(to='/analytics/weekly') Weekly
               b-card-body
                   router-view
 </template>
