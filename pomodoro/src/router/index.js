@@ -11,25 +11,24 @@ const routes = [
     component: Home,
     meta: {
       title: '番茄鐘'
-    },
-    children: [
-      {
-        path: '/',
-        name: 'HomePomodoro',
-        component: () => import(/* webpackChunkName: "home-Pomodoro" */ '../views/HomePomodoro.vue'),
-        meta: {
-          title: '番茄鐘'
-        }
-      },
-      {
-        path: 'shortbreak',
-        name: 'HomeShortBreak',
-        component: () => import(/* webpackChunkName: "home-ShortBreak" */ '../views/HomeShortBreak.vue'),
-        meta: {
-          title: '番茄鐘'
-        }
-      }
-    ]
+    }
+    // children: []
+  },
+  {
+    path: '/home/pomodoro',
+    name: 'HomePomodoro',
+    component: () => import(/* webpackChunkName: "home-Pomodoro" */ '../views/HomePomodoro.vue'),
+    meta: {
+      title: '番茄鐘       \\\\'
+    }
+  },
+  {
+    path: '/home/shortbreak',
+    name: 'HomeShortBreak',
+    component: () => import(/* webpackChunkName: "home-ShortBreak" */ '../views/HomeShortBreak.vue'),
+    meta: {
+      title: '番茄鐘'
+    }
   },
   //   每開一個新分頁要設定
   // {

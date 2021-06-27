@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 const time = parseInt(process.env.VUE_APP_TIME)
-// const timeBreak = parseInt(process.env.VUE_APP_TIME_BREAK)
+const timeBreak = parseInt(process.env.VUE_APP_TIME_BREAK)
 
 Vue.use(Vuex)
 
@@ -15,12 +15,14 @@ export default new Vuex.Store({
     list: [],
     // 完成清單，list 完成的資料會移入此
     finished: [],
-    // 目前的待做事項
+    // 目前的待辦事項
     current: '',
     // 目前的倒數的時間
     timeleft: time,
     // 判斷是不是休息時間
     isBreak: false,
+    imgTime: 'iconmonstr-marketing-4.png',
+    imgTimeBreak: 'tree.png',
     // 倒數的狀態 0=停止 1=倒數中 2=暫停
     status: 0
   },
@@ -88,9 +90,52 @@ export default new Vuex.Store({
     canceLlist (state, data) {
       state.list[data].todoEdit = state.list[data].todo
       state.list[data].edit = false
+    },
+    // 按 > 開始按鈕時機
+    startTodo (state) {
+      // 休息狀態判斷
+      if (state.isBreak) {
+        // 如果是休息時間顯示 ''
+        state.current = 'Time to Take a break'
+        // 開始時 要加入背景圖片判斷
+      } else {
+        // 不是休息時間 開始時，將 list 的第一筆(.shift() )放入
+        state.current = state.list.shift().todo
+        // 開始時 要加入背景圖片判斷
+      }
+    },
+    // 更改狀態
+    changeStatus (state, data) {
+      state.status = data
+    },
+    // 倒數
+    countdown (state) {
+      state.timeleft--
+    },
+    // 結束
+    addFinish (state) {
+      // 完成時，將目前的待辦事項放入完成清單
+      state.finished.push(state.current)
+      // 結束後，沒有待辦事項時，顯示 'unknown task'
+      state.current = 'unknown task'
+      // 如果待辦清單list 內有資料時
+      if (state.list.length > 0) {
+        // 切換休息狀態
+        state.isBreak = !state.isBreak
+        // 是休息時間 true 就變為不是休息時間 false
+        // 不是休息時間 false 就變為是休息時間 true
+      }
+      // 判斷
+      state.timeleft = state.isBreak ? timeBreak : time
+      // 條件 ? 成立時執行的程式 : 否定時執行的程式
+      // if (state.timeleft = state.isBreak) {
+      //   return timeBreak
+      // } else {
+      //   return time
+      // }
     }
   },
-  // 可以先處理好 function ，再 return 出來，不用外面再處理一次
+  // getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
   getters: {
     list (state) {
       return state.list
