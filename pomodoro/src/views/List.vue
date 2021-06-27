@@ -54,6 +54,20 @@
                 ).taskInput
             b-btn(type='submit' variant="secondary" @click='additem').taskBtn Add task
             //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
+            div
+              label(for='datepicker-invalid') Choose a date (invalid style)
+              b-form-datepicker#datepicker-invalid.mb-2(:state='false')
+              label(for='datepicker-valid') Choose a date (valid style)
+              b-form-datepicker#datepicker-valid(:state='true')
+              label(for='datepicker-placeholder') Date picker with placeholder
+              b-form-datepicker#datepicker-placeholder(placeholder='Choose a Date' locale='en')
+            div
+              label(for='datepicker-buttons') Date picker with optional footer buttons
+              b-form-datepicker#datepicker-buttons(today-button reset-button close-button locale='en')
+            div
+              label(for='datepicker-dateformat1') Custom date format
+              | 
+              b-form-datepicker#datepicker-dateformat1(:date-format-options='{ year: \'numeric\', month: \'short\', day: \'2-digit\', weekday: \'short\' }' locale='en') label.mt-3(for='datepicker-dateformat2') Short date format b-form-datepicker#datepicker-dateformat2(:date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }' locale='en')
 </template>
 
 <script>
