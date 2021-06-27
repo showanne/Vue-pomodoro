@@ -41,17 +41,19 @@
                 img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
-          b-form-group(invalid-feedback='請至少輸入 2 個字' :state='state')
-            //- invalid-feedback='' 驗證訊息文字
-            //- :state='' 驗證狀態判斷
-            b-form-input(
-              v-model='newitem'
-              :state='state'
-              trim
-              placeholder="Task..."
-              @keydown.enter='additem'
-              ).taskInput
-          b-btn(variant="secondary" @click='additem').taskBtn Add task
+          b-form(@submit.prevent="addData")
+            b-form-group(invalid-feedback='請至少輸入 2 個字' :state='state')
+              //- invalid-feedback='' 驗證訊息文字
+              //- :state='' 驗證狀態判斷
+              b-form-input(
+                v-model='newitem'
+                :state='state'
+                trim
+                placeholder="Task..."
+                @keydown.enter='additem'
+                ).taskInput
+            b-btn(type='submit' variant="secondary" @click='additem').taskBtn Add task
+            //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
 </template>
 
 <script>
@@ -96,6 +98,23 @@ export default {
     }
   },
   methods: {
+    // 將送出的待辦事項存資料庫
+    async addData () {
+      try {
+        console.log(this.newitem)
+        console.log(this.$store.mutations.addList)
+        const { data } = await this.axios.post('http://localhost:3030/pomodoroData', this.$store.mutations.addList)
+        console.log(data.message)
+        if (data.success) {
+          alert('Add task')
+        } else {
+          alert(data.message)
+        }
+      } catch (error) {
+        console.log(error)
+        // alert(error.response.data.message)
+      }
+    },
     // 新增待辦
     additem () {
       // 判斷有沒有輸入東西
@@ -103,7 +122,7 @@ export default {
         // 呼叫 \store\index.js 內的 mutations 的 addList function 將 this.newitem 值帶入
         this.$store.commit('addList', this.newitem)
         // 清空輸入欄位
-        this.newitem = ''
+        // this.newitem = ''
       }
     },
     // 編輯欄位
