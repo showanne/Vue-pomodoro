@@ -48,8 +48,23 @@
   margin-top 110px
 .vh-100
   height calc(100vh - 110px) !important
+.nav-tabs .nav-link
+    border unset
+    border-top-left-radius unset
+    border-top-right-radius unset
+
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover
+  border-color unset
+.tabs .nav-pills .nav-link
+  color #407061
+  transition 0.5s
+  // table-layout: fixed;  讓連結不抖動
+  // text-decoration: none;
+  background-color transparent
   border-color unset 
+.tabs .nav-pills .nav-link:focus, .tabs .nav-pills .nav-link:hover, .tabs .nav-pills .nav-link.active
+  color #caceac
+  border-bottom #caceac 4px solid
 
 .btn-font
   font-weight 200
@@ -130,6 +145,8 @@
   border-radius 4px
 
 // For Analytics.vue
-.font-analytics
+.font-analytics, .tabs .nav-pills .nav-link.disabled
+  margin-right 10rem
+  color #CACEAC
   font normal normal bold 40px/45px Arimo
   text-transform capitalize
