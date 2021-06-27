@@ -3,8 +3,8 @@
     b-container.vh-100
       b-row
         b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
-          b-btn(to='/home/pomodoro').my-3 {{ btnStartText }}
-          b-btn(to='/list').my-3 Choose Task
+          b-btn(variant='secondary' to='/home/pomodoro').my-3 {{ btnStartText }}
+          b-btn(variant='outline-secondary' to='/list').my-3 Choose Task
         b-col(cols='4')
           img(:src='require("../assets/img/iconmonstr-marketing-4.png")')
       b-row
@@ -20,7 +20,7 @@
               font-awesome-icon(:icon='["fas", "pause"]').text-secondary.btn-font
             b-btn(variant='primary' v-if='current.length > 0').mx-2
               //- 如果現在倒數數字長度大於0時，出現跳過按鈕
-              font-awesome-icon(:icon='["fas", "step-forward"]').text-secondary.btn-font
+              font-awesome-icon(:icon='["fas", "step-forward"]' @click='finish(true)').text-secondary.btn-font
         b-col(cols='4')
           //- 待辦
           h1.font-current {{ current }}
