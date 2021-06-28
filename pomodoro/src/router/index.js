@@ -19,7 +19,7 @@ const routes = [
     name: 'HomePomodoro',
     component: () => import(/* webpackChunkName: "home-Pomodoro" */ '../views/HomePomodoro.vue'),
     meta: {
-      title: '番茄鐘       \\\\'
+      title: '番茄鐘 | 倒數'
     }
   },
   {
@@ -27,7 +27,7 @@ const routes = [
     name: 'HomeShortBreak',
     component: () => import(/* webpackChunkName: "home-ShortBreak" */ '../views/HomeShortBreak.vue'),
     meta: {
-      title: '番茄鐘'
+      title: '番茄鐘 | 休息'
     }
   },
   //   每開一個新分頁要設定
