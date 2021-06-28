@@ -18,5 +18,7 @@
             b-nav-item(to='/settings').nav-img
               | 設定 icon
               //- img(:src='require("../src/assets/img/single-folded-content-A.png")').w-100
-    router-view
+    //- 要注意 使用 view-router 時，換頁內容會被清掉，所以在外層包 keep-alive 讓 router-view 繼續作用
+    keep-alive
+      router-view
 </template>
