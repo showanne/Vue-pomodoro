@@ -23,7 +23,15 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // FontAwesome 根據 icon 的種類引用
 import { faPen, faCheck, faUndo, faTrash, faPlay, faPause, faStepForward } from '@fortawesome/free-solid-svg-icons'
-// 引用
+
+// 引用 vue-sweetalert2
+import VueSweetalert2 from 'vue-sweetalert2'
+// 引用 vue-sweetalert2 styles
+import 'sweetalert2/dist/sweetalert2.min.css'
+
+// ----- ESLint 規定 import 放上方 -----
+
+// FontAwesome 根據 icon 的種類引用
 library.add(faPen, faCheck, faUndo, faTrash, faPlay, faPause, faStepForward)
 
 // Axios 註冊元件
@@ -35,6 +43,9 @@ Vue.component('apexchart', VueApexCharts)
 
 // FontAwesome 註冊元件，可供本專案各處使用(全域註冊)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+// sweetalert2 註冊元件
+Vue.use(VueSweetalert2)
 
 Vue.config.productionTip = false
 

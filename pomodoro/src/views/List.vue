@@ -37,11 +37,12 @@
                 img(:src='require("../assets/img/ic_keyboard_arrow_up-A.png")')
               b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                 img(:src='require("../assets/img/ic_keyboard_arrow_down-A.png")')
-              b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+              b-btn(variant="primary" @click='' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
                 img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
-          b-form(@submit.prevent="addData")
+          //- b-form(@submit.prevent="addData")
+          b-form
             b-form-group(invalid-feedback='請至少輸入 2 個字' :state='state')
               //- invalid-feedback='' 驗證訊息文字
               //- :state='' 驗證狀態判斷
@@ -66,7 +67,7 @@
               b-form-datepicker#datepicker-buttons(today-button reset-button close-button locale='en')
             div
               label(for='datepicker-dateformat1') Custom date format
-              | 
+              |
               b-form-datepicker#datepicker-dateformat1(:date-format-options='{ year: \'numeric\', month: \'short\', day: \'2-digit\', weekday: \'short\' }' locale='en') label.mt-3(for='datepicker-dateformat2') Short date format b-form-datepicker#datepicker-dateformat2(:date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }' locale='en')
 </template>
 
@@ -113,22 +114,22 @@ export default {
   },
   methods: {
     // 將送出的待辦事項存資料庫
-    async addData () {
-      try {
-        console.log(this.newitem)
-        console.log(this.$store.mutations.addList)
-        const { data } = await this.axios.post('http://localhost:3030/pomodoroData', this.$store.mutations.addList)
-        console.log(data.message)
-        if (data.success) {
-          alert('Add task')
-        } else {
-          alert(data.message)
-        }
-      } catch (error) {
-        console.log(error)
-        // alert(error.response.data.message)
-      }
-    },
+    // async addData () {
+    //   try {
+    //     console.log(this.newitem)
+    //     console.log(this.$store.mutations.addList)
+    //     const { data } = await this.axios.post('http://localhost:3030/pomodoroData', this.$store.mutations.addList)
+    //     console.log(data.message)
+    //     if (data.success) {
+    //       alert('Add task')
+    //     } else {
+    //       alert(data.message)
+    //     }
+    //   } catch (error) {
+    //     console.log(error)
+    //     // alert(error.response.data.message)
+    //   }
+    // },
     // 新增待辦
     additem () {
       // 判斷有沒有輸入東西
@@ -136,7 +137,13 @@ export default {
         // 呼叫 \store\index.js 內的 mutations 的 addList function 將 this.newitem 值帶入
         this.$store.commit('addList', this.newitem)
         // 清空輸入欄位
-        // this.newitem = ''
+        this.newitem = ''
+      } else {
+        // 沒有輸入東西就送出會跳警示訊息
+        this.$swal({
+          icon: 'error',
+          title: '請至少輸入 2 個字'
+        })
       }
     },
     // 編輯欄位
