@@ -5,9 +5,10 @@ const time = parseInt(process.env.VUE_APP_TIME)
 const timeBreak = parseInt(process.env.VUE_APP_TIME_BREAK)
 
 Vue.use(Vuex)
+// Vuex 可以儲存網頁的狀態，讓元件間的資料共享更方便
 
 export default new Vuex.Store({
-  // Vuex 有哪些資料
+  // 狀態 Vuex 有哪些資料
   state: {
     // 設定預設鈴聲
     sound: 'alarm.mp3',
@@ -26,7 +27,7 @@ export default new Vuex.Store({
     // 倒數的狀態 0=停止 1=倒數中 2=暫停
     status: 0
   },
-  // 改變的 state 的 function ， state 值僅能在此更動
+  // 修改狀態的 function，改變的 state 的 function ， state 值僅能在此更動
   mutations: {
     //  function (state 就是上面的 , data 是想丟進 function 的值)
     selectSound (state, data) {
@@ -135,15 +136,16 @@ export default new Vuex.Store({
       // }
     }
   },
-  // getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
+  // 獲取資料的 function，getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
   getters: {
     list (state) {
       return state.list
     }
   },
-  // 可以執行同步非同步
+  // 修改狀態的 function，可以執行同步非同步
   actions: {
   },
+  // 將 Vuex 模組化分割
   modules: {
   }
 })
