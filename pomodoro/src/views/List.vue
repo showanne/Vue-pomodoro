@@ -4,6 +4,7 @@
       b-row
         b-col(cols='6').p-3
           //- h1.mb-2 待辦清單
+          h1.mb-2 Todo
           b-table(:items='list' :fields='listfields').text-secondary
             template(#cell(check)='data')
               input(type='checkbox' v-model='data.item.check')
@@ -39,6 +40,18 @@
                 img(:src='require("../assets/img/ic_keyboard_arrow_down-A.png")')
               b-btn(variant="primary" @click='' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
                 img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
+          h1.my-2 Done
+          b-table-simple(table-variant="primary").bg-transparent.text-secondary
+            thead
+              tr
+                th 已完成待辦事項
+                th 完成日期
+                th 操作
+            tbody
+              tr()
+                td 
+                td
+                td
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
           b-form(@submit.prevent="additem")
@@ -56,19 +69,18 @@
             b-btn(type='submit' variant="secondary").taskBtn Add task
             //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
             div
-              label(for='datepicker-invalid') Choose a date (invalid style)
-              b-form-datepicker#datepicker-invalid.mb-2(:state='false')
-              label(for='datepicker-valid') Choose a date (valid style)
-              b-form-datepicker#datepicker-valid(:state='true')
-              label(for='datepicker-placeholder') Date picker with placeholder
-              b-form-datepicker#datepicker-placeholder(placeholder='Choose a Date' locale='en')
+              label(for='example-input') Choose a date
+              b-input-group.mb-3
+                b-form-input#example-input(v-model='value' type='text' placeholder='YYYY-MM-DD' autocomplete='off')
+                b-input-group-append
+                  b-form-datepicker(v-model='value' button-only right locale='en-US' aria-controls='example-input' @context='onContext')
             div
-              label(for='datepicker-buttons') Date picker with optional footer buttons
-              b-form-datepicker#datepicker-buttons(today-button reset-button close-button locale='en')
+              label(for='datepicker-valid') Choose a date (valid style)
+              b-form-datepicker.bg-transparent#datepicker-valid(:state='true')
             div
               label(for='datepicker-dateformat1') Custom date format
               |
-              b-form-datepicker#datepicker-dateformat1(:date-format-options='{ year: \'numeric\', month: \'short\', day: \'2-digit\', weekday: \'short\' }' locale='en') label.mt-3(for='datepicker-dateformat2') Short date format b-form-datepicker#datepicker-dateformat2(:date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }' locale='en')
+              b-form-datepicker.bg-transparent#datepicker-dateformat1(:date-format-options='{ year: \'numeric\', month: \'short\', day: \'2-digit\', weekday: \'short\' }' locale='en') label.mt-3(for='datepicker-dateformat2') Short date format b-form-datepicker#datepicker-dateformat2(:date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }' locale='en')
 </template>
 
 <script>
@@ -132,7 +144,7 @@ export default {
     // },
     // 新增待辦
     additem () {
-      //- console.log(this.state)
+      // console.log(this.state)
       // 判斷有沒有輸入東西
       if (this.state) {
         // 呼叫 \store\index.js 內的 mutations 的 addList function 將 this.newitem 值帶入
@@ -162,7 +174,26 @@ export default {
     },
     cancellist (index) {
       this.$store.commit('canceLlist', index)
-    }
+    },
+    onContext(ctx) {
+        // The date formatted in the locale, or the `label-no-date-selected` string
+        this.formatted = ctx.selectedFormatted
+        // The following will be an empty string until a valid date is entered
+        this.selected = ctx.selectedYMD
+        // Context:
+        // {
+        //   "selectedYMD": "",
+        //   "selectedDate": null,
+        //   "selectedFormatted": "未选择日期",
+        //   "activeYMD": "2021-06-30",
+        //   "activeDate": "2021-06-29T16:00:00.000Z",
+        //   "activeFormatted": "2021年6月30日星期三",
+        //   "disabled": false,
+        //   "locale": "zh",
+        //   "calendarLocale": "zh",
+        //   "rtl": false
+        // }
+      }
   }
 }
 </script>
