@@ -45,7 +45,8 @@ export default {
     },
     // 其他 function ------
     btnStartText () {
-      let text = ''
+      // console.log(this.current.length)
+      let text
       // 如果 this.current 長度為 0
       if (this.current.length === 0) {
         // 如果 list 長度為 0
@@ -54,6 +55,8 @@ export default {
         } else {
           text = 'Start Pomodoro'
         }
+      } else if (this.current === 'unknown task') {
+        text = 'unknown task'
       }
       return text
     }

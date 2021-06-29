@@ -41,8 +41,8 @@
                 img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
-          //- b-form(@submit.prevent="addData")
-          b-form
+          b-form(@submit.prevent="additem")
+            //- b-form
             b-form-group(invalid-feedback='請至少輸入 2 個字' :state='state')
               //- invalid-feedback='' 驗證訊息文字
               //- :state='' 驗證狀態判斷
@@ -51,9 +51,9 @@
                 :state='state'
                 trim
                 placeholder="Task..."
-                @keydown.enter='additem'
                 ).taskInput
-            b-btn(type='submit' variant="secondary" @click='additem').taskBtn Add task
+                //- @keydown.enter='additem'
+            b-btn(type='submit' variant="secondary").taskBtn Add task
             //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
             div
               label(for='datepicker-invalid') Choose a date (invalid style)
@@ -132,6 +132,7 @@ export default {
     // },
     // 新增待辦
     additem () {
+      //- console.log(this.state)
       // 判斷有沒有輸入東西
       if (this.state) {
         // 呼叫 \store\index.js 內的 mutations 的 addList function 將 this.newitem 值帶入
