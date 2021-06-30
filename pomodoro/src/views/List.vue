@@ -48,10 +48,12 @@
                 th 完成日期
                 th 操作
             tbody
-              tr()
-                td 
+              tr(v-for='(item, idx) in finished' :key='idx')
+                td {{ item }}
                 td
                 td
+                  b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
+                    img(:src='require("../assets/img/ic_remove_circle_outline-A.png")')
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
           b-form(@submit.prevent="additem")
@@ -68,12 +70,6 @@
                 //- @keydown.enter='additem'
             b-btn(type='submit' variant="secondary").taskBtn Add task
             //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
-            div
-              label(for='example-input') Choose a date
-              b-input-group.mb-3
-                b-form-input#example-input(v-model='value' type='text' placeholder='YYYY-MM-DD' autocomplete='off')
-                b-input-group-append
-                  b-form-datepicker(v-model='value' button-only right locale='en-US' aria-controls='example-input' @context='onContext')
             div
               label(for='datepicker-valid') Choose a date (valid style)
               b-form-datepicker.bg-transparent#datepicker-valid(:state='true')
@@ -122,6 +118,9 @@ export default {
         }
         return item
       })
+    },
+    finished () {
+      return this.$store.state.finished
     }
   },
   methods: {
@@ -175,25 +174,28 @@ export default {
     cancellist (index) {
       this.$store.commit('canceLlist', index)
     },
-    onContext(ctx) {
-        // The date formatted in the locale, or the `label-no-date-selected` string
-        this.formatted = ctx.selectedFormatted
-        // The following will be an empty string until a valid date is entered
-        this.selected = ctx.selectedYMD
-        // Context:
-        // {
-        //   "selectedYMD": "",
-        //   "selectedDate": null,
-        //   "selectedFormatted": "未选择日期",
-        //   "activeYMD": "2021-06-30",
-        //   "activeDate": "2021-06-29T16:00:00.000Z",
-        //   "activeFormatted": "2021年6月30日星期三",
-        //   "disabled": false,
-        //   "locale": "zh",
-        //   "calendarLocale": "zh",
-        //   "rtl": false
-        // }
-      }
+    delfinish (index) {
+      this.$store.commit('delFinish', index)
+    },
+    onContext (ctx) {
+      // The date formatted in the locale, or the `label-no-date-selected` string
+      this.formatted = ctx.selectedFormatted
+      // The following will be an empty string until a valid date is entered
+      this.selected = ctx.selectedYMD
+      // Context:
+      // {
+      //   "selectedYMD": "",
+      //   "selectedDate": null,
+      //   "selectedFormatted": "未选择日期",
+      //   "activeYMD": "2021-06-30",
+      //   "activeDate": "2021-06-29T16:00:00.000Z",
+      //   "activeFormatted": "2021年6月30日星期三",
+      //   "disabled": false,
+      //   "locale": "zh",
+      //   "calendarLocale": "zh",
+      //   "rtl": false
+      // }
+    }
   }
 }
 </script>

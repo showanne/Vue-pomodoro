@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+// 將 Vuex 資料存 localstorage
+import createPersistedState from 'vuex-persistedstate'
+
 const time = parseInt(process.env.VUE_APP_TIME)
 const timeBreak = parseInt(process.env.VUE_APP_TIME_BREAK)
 
@@ -115,8 +118,11 @@ export default new Vuex.Store({
     },
     // 結束
     addFinish (state) {
-      // 完成時，將目前的待辦事項放入完成清單
-      state.finished.push(state.current)
+      // 判斷不是休息時間，再將 state.current 放入 finished ，否則 'Time to Take a break' 也會被放入完成清單
+      if (!state.isBreak) {
+        // 完成時，將目前的待辦事項放入完成清單
+        state.finished.push(state.current)
+      }
       // 結束後，沒有待辦事項時，顯示 'unknown task'
       state.current = 'unknown task'
       // 如果待辦清單list 內有資料時
@@ -134,6 +140,15 @@ export default new Vuex.Store({
       // } else {
       //   return time
       // }
+    },
+    // 將已完成的待辦 放進表格
+    delFinish (state, data) {
+      state.finished.push({
+        // 完成的待辦事項
+        done: state.finished.splice(data, 1),
+        // 完成待辦事項的日期
+        date: new Date().toLocaleDateString('zh-tw')
+      })
     }
   },
   // 獲取資料的 function，getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
@@ -147,5 +162,11 @@ export default new Vuex.Store({
   },
   // 將 Vuex 模組化分割
   modules: {
-  }
+  },
+  // 將 Vuex 資料存 localstorage
+  plugins: [
+    createPersistedState({
+      key: 'Pomodoro'
+    })
+  ]
 })
