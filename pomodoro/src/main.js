@@ -22,7 +22,7 @@ import VueApexCharts from 'vue-apexcharts'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // FontAwesome 根據 icon 的種類引用
-import { faPen, faCheck, faUndo, faTrash, faPlay, faPause, faStepForward } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faCheck, faUndo, faTrash, faPlay, faPause, faStepForward, faCog, faStop, faPlayCircle } from '@fortawesome/free-solid-svg-icons'
 
 // 引用 vue-sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2'
@@ -32,7 +32,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 // ----- ESLint 規定 import 放上方 -----
 
 // FontAwesome 根據 icon 的種類引用
-library.add(faPen, faCheck, faUndo, faTrash, faPlay, faPause, faStepForward)
+library.add(faPen, faCheck, faUndo, faTrash, faPlay, faPause, faStepForward, faCog, faStop, faPlayCircle)
 
 // Axios 註冊元件
 Vue.use(VueAxios, axios)

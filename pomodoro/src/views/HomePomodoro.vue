@@ -15,6 +15,10 @@
             b-btn(variant='primary' v-if='current.length > 0' @click='finish(true)').mx-2
               //- 如果現在倒數數字長度大於0時，出現跳過按鈕
               font-awesome-icon(:icon='["fas", "step-forward"]').text-secondary.btn-font
+              br
+              font-awesome-icon(:icon='["fas", "stop"]').text-secondary.btn-font
+              br
+              font-awesome-icon(:icon='["fas", "play-circle"]').text-secondary.btn-font
         b-col(cols='4')
           //- 待辦
           h1.font-current {{ current }}
