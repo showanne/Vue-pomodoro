@@ -8,6 +8,10 @@
           b-table(:items='list' :fields='listfields').text-secondary
             template(#cell(check)='data')
               input(type='checkbox' v-model='data.item.check')
+              .checkTodo
+                span
+                  input(type='radio' name='checkTodo')
+                  //- input(type='radio' name='radio' checked)
             template(#cell(todo)='data')
               b-form-input(
                 v-if='data.item.edit'

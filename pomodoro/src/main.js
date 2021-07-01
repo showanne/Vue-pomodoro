@@ -6,6 +6,9 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+
+// 引用 check 的 style
+import './style/InputStyling.css'
 // 引用 自行變動部分 BS 變數後的檔案'./style/_variables.scss'，不再此引用變數檔，改引用已編譯好的 css
 import './style/all.css'
 // 引用 自己的 style

@@ -1,6 +1,10 @@
 <template lang="pug">
   #home
-    img(:src='require("../assets/img/bell.png")').w-25
+    .bellcontrol
+      img(:src='require("../assets/img/bell.png")').w-25.m-2
+      .checkBell
+          span
+            input(type='checkbox' name='checkBell' checked)
     b-container.vh-100
       b-row
         b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
