@@ -16,7 +16,8 @@
               //- | 分析 icon
               img(:src='require("../src/assets/img/navbar-content.png")').w-100
             b-nav-item(to='/settings').nav-img
-              font-awesome-icon(:icon='["fas", "cog"]').btn-font.text-secondary
+              font-awesome-icon(:icon='["fas", "cog"]').text-secondary
+              //- .fs-1 font-size: 2.5rem;
     //- 要注意 使用 view-router 時，換頁內容會被清掉，所以在外層包 keep-alive 讓 router-view 繼續作用
     keep-alive
       router-view

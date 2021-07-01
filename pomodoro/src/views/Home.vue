@@ -1,8 +1,8 @@
 <template lang="pug">
   #home
     .bellcontrol
-      img(:src='require("../assets/img/bell.png")').w-25.m-2
-      .checkBell
+      img(:src='require("../assets/img/bell.png")').align-middle
+      .checkBell.d-inline-block.align-middle
           span
             input(type='checkbox' name='checkBell' checked)
     b-container.vh-100
@@ -11,7 +11,7 @@
           b-btn(variant='secondary' to='/home/pomodoro').my-3 {{ btnStartText }}
           b-btn(variant='outline-secondary' to='/list').my-3 Choose Task
         b-col(cols='4')
-          img(:src='require("../assets/img/deco-market.png")')
+          img(:src='require("../assets/img/deco-market.png")').align-bottom
       //- b-row
       //-   b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
       //-     //- h1 倒計時文字
