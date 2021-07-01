@@ -1,12 +1,13 @@
 <template lang="pug">
   #home
+    img(:src='require("../assets/img/bell.png")').w-25
     b-container.vh-100
       b-row
         b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
           b-btn(variant='secondary' to='/home/pomodoro').my-3 {{ btnStartText }}
           b-btn(variant='outline-secondary' to='/list').my-3 Choose Task
         b-col(cols='4')
-          img(:src='require("../assets/img/iconmonstr-marketing-4.png")')
+          img(:src='require("../assets/img/deco-market.png")')
       //- b-row
       //-   b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
       //-     //- h1 倒計時文字

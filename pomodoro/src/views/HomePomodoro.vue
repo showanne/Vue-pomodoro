@@ -23,7 +23,7 @@
           //- 待辦
           h1.font-current {{ current }}
           //- 開始時 要加入背景圖片判斷
-          img(:src='require("../assets/img/tree.png")')
+          img(:src='require("../assets/img/deco-tree.png")')
 </template>
 
 <script>

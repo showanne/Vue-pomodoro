@@ -8,13 +8,13 @@
           b-navbar-nav.ml-auto
             b-nav-item(to='/').nav-img
               //- | 倒數頁 = 首頁
-              img(:src='require("../src/assets/img/ic_av_timer-A.png")').w-100
+              img(:src='require("../src/assets/img/navbar-timer2.png")').w-100
             b-nav-item(to='/list').nav-img
               //- | 待辦清單 icon
-              img(:src='require("../src/assets/img/ic_playlist_add_check-A.png")').w-100
+              img(:src='require("../src/assets/img/navbar-checklist2.png")').w-100
             b-nav-item(to='/analytics').nav-img
               //- | 分析 icon
-              img(:src='require("../src/assets/img/single-folded-content-A.png")').w-100
+              img(:src='require("../src/assets/img/navbar-content.png")').w-100
             b-nav-item(to='/settings').nav-img
               font-awesome-icon(:icon='["fas", "cog"]').btn-font.text-secondary
     //- 要注意 使用 view-router 時，換頁內容會被清掉，所以在外層包 keep-alive 讓 router-view 繼續作用

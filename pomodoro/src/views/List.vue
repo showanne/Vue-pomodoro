@@ -26,7 +26,7 @@
                 b-btn(variant="primary" @click='editlist(data.index)').rounded-circle.px-1.py-0
                   font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
                 b-btn(variant="primary" @click='dellist(data.index)').rounded-circle.px-1.py-0.actionBtn
-                  img(:src='require("../assets/img/ic_remove_circle_outline-A.png")')
+                  img(:src='require("../assets/img/action-remove.png")')
               //- 如果是編輯模式 顯示
               span(v-else)
                 b-btn(variant="primary" @click='changelist(data.index)').rounded-circle.px-1.py-0
@@ -35,11 +35,11 @@
                   font-awesome-icon(:icon='["fas", "undo"]').btn-font
             template(#cell(action)='data')
               b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                img(:src='require("../assets/img/ic_keyboard_arrow_up-A.png")')
+                img(:src='require("../assets/img/action-arrow-up.png")')
               b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                img(:src='require("../assets/img/ic_keyboard_arrow_down-A.png")')
+                img(:src='require("../assets/img/action-arrow-down.png")')
               b-btn(variant="primary" @click='' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
-                img(:src='require("../assets/img/iconmonstr-log-out-10-A.png")')
+                img(:src='require("../assets/img/action-log-out.png")')
           h1.my-2 Done
           b-table-simple(table-variant="primary").bg-transparent.text-secondary
             thead
@@ -53,7 +53,7 @@
                 td
                 td
                   b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
-                    img(:src='require("../assets/img/ic_remove_circle_outline-A.png")')
+                    img(:src='require("../assets/img/action-remove.png")')
         b-col(cols='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
           b-form(@submit.prevent="additem")
