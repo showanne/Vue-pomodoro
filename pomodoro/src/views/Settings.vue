@@ -1,15 +1,15 @@
 <template lang="pug">
   #settings.vh-100
-    b-container.pt-5
+    b-container
       b-row
-        b-col(cols='12')
-          h2 鈴聲設定
+        b-col
+          h2.pt-5 鈴聲設定
           //- @row-click BS自訂的事件，下在 b-table 上，代表點即每一列時，修改 Vuex 的值
           b-table( hover
                    :items='items'
                    :fields='fields'
                    @row-clicked='select'
-                  ).textSecondary
+                  ).table-dark.text-secondary.bg-transparent
             //- template 自訂表格內容   #cell 欄位
             template(#cell(select)='data')
               font-awesome-icon(:icon='["fas", "check"]' v-if='sound === data.item.src')
