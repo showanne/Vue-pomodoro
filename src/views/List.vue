@@ -118,10 +118,10 @@ export default {
   computed: {
     // 輸入文字長度 判斷
     state () {
-      if (this.newitem.todo.length === 0) {
+      if (this.newitem.length === 0) {
         return null
         // 什麼都沒有!
-      } else if (this.newitem.todo.length < 2) {
+      } else if (this.newitem.length < 2) {
         return false
         // 驗證訊息樣式 紅色 ×
       } else {
@@ -141,28 +141,10 @@ export default {
       })
     },
     finished () {
-      console.log(this.$store.state.finished)
       return this.$store.state.finished
     }
   },
   methods: {
-    // 將送出的待辦事項存資料庫
-    // async addData () {
-    //   try {
-    //     console.log(this.newitem)
-    //     console.log(this.$store.mutations.addList)
-    //     const { data } = await this.axios.post('http://localhost:3030/pomodoroData', this.$store.mutations.addList)
-    //     console.log(data.message)
-    //     if (data.success) {
-    //       alert('Add task')
-    //     } else {
-    //       alert(data.message)
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //     // alert(error.response.data.message)
-    //   }
-    // },
     // 新增待辦
     additem () {
       // console.log(this.state)
