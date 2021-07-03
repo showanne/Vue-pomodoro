@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5e26b0570c8cead24a52",
-    "url": "css/app.2ea08701.css"
+    "revision": "8c6b2692b97675d09e06",
+    "url": "css/app.9698b637.css"
   },
   {
     "revision": "edaf05505c4a38faa590",
@@ -32,6 +32,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/action-remove.f00bbd70.png"
   },
   {
+    "revision": "4494c1057f12b353e7a1780461037428",
+    "url": "img/deco-fun.4494c105.png"
+  },
+  {
     "revision": "7c64d19163ff5bbd276b6e8cec386436",
     "url": "img/deco-market.7c64d191.png"
   },
@@ -52,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/navbar-timer2.30f52dda.png"
   },
   {
-    "revision": "2ce050a207cdf59037156bdd77e911c2",
+    "revision": "ff3ae248b64b19183374f09938549936",
     "url": "index.html"
   },
   {
@@ -68,16 +72,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/analytics.54f292c0.js"
   },
   {
-    "revision": "5e26b0570c8cead24a52",
-    "url": "js/app.850ea2af.js"
+    "revision": "8c6b2692b97675d09e06",
+    "url": "js/app.d46b2cb9.js"
   },
   {
     "revision": "edaf05505c4a38faa590",
     "url": "js/chunk-vendors.41b254f8.js"
   },
   {
-    "revision": "3fc71c387bbeaf241883",
-    "url": "js/home-Pomodoro.31b9feee.js"
+    "revision": "ff2d7fb6a04c5a27d077",
+    "url": "js/home-Pomodoro.84e51aeb.js"
   },
   {
     "revision": "6d2bdc998085f99b9e86",
@@ -92,8 +96,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/list-Todo.99f9e8d3.js"
   },
   {
-    "revision": "5298ea78fbf5d768dd1e",
-    "url": "js/list.c0802482.js"
+    "revision": "3e363f6d55cad1203452",
+    "url": "js/list.5cdefb7a.js"
   },
   {
     "revision": "5c1994ca27fcfef3eecf",
