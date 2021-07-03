@@ -29,4 +29,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           branch: gh-pages
+          # 打包後創建的資料夾名稱
           folder: dist
