@@ -1,16 +1,16 @@
 <template lang="pug">
   #list
-    b-container.vh-100
-      b-row
-        b-col(cols='6').p-3
+    b-container.min-vh-100
+      b-row.flex-column-reverse.flex-lg-row
+        b-col(cols='12' lg='6').p-3
           //- h1.mb-2 待辦清單
           h1.mb-2 Todo
           b-table(:items='list' :fields='listfields').text-secondary
             template(#cell(check)='data')
               input(type='checkbox' v-model='data.item.check')
-              .checkTodo
-                span
-                  input(type='radio' name='checkTodo')
+              //- .checkTodo
+              //-   span
+              //-     input(type='radio' name='checkTodo')
                   //- input(type='radio' name='radio' checked)
             template(#cell(todo)='data')
               b-form-input(
@@ -58,7 +58,7 @@
                 td
                   b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
                     img(:src='require("../assets/img/action-remove.png")')
-        b-col(cols='6').p-3.text-right
+        b-col(cols='12' lg='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
           b-form(@submit.prevent="additem")
             //- b-form
@@ -81,6 +81,9 @@
               label(for='datepicker-dateformat1') Custom date format
               |
               b-form-datepicker.bg-transparent#datepicker-dateformat1(:date-format-options='{ year: \'numeric\', month: \'short\', day: \'2-digit\', weekday: \'short\' }' locale='en') label.mt-3(for='datepicker-dateformat2') Short date format b-form-datepicker#datepicker-dateformat2(:date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }' locale='en')
+          div.mt-3.text-center
+            p.text-mute.font-listnone.my-5 Let’s start something fun
+            img(:src='require("../assets/img/deco-fun.png")').img-deco
 </template>
 
 <script>

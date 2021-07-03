@@ -2,7 +2,7 @@
   #homePomodoro
     b-container.vh-100
       b-row
-        b-col(cols='8').d-flex.justify-content-center.align-items-center.flex-column
+        b-col(cols='12' lg='8').d-flex.justify-content-center.align-items-center.flex-column
           //- h1 倒計時文字
           h1.my-5.align-middle.font-countdown {{ timeText }}
           .button.my-3
@@ -14,16 +14,17 @@
               font-awesome-icon(:icon='["fas", "pause"]' ).text-secondary.btn-font
             b-btn(variant='primary' v-if='current.length > 0' @click='finish(true)').mx-2
               //- 如果現在倒數數字長度大於0時，出現跳過按鈕
-              font-awesome-icon(:icon='["fas", "step-forward"]').text-secondary.btn-font
-              br
+              //- font-awesome-icon(:icon='["fas", "step-forward"]').text-secondary.btn-font
+              //- br
               font-awesome-icon(:icon='["fas", "stop"]').text-secondary.btn-font
-              br
-              font-awesome-icon(:icon='["fas", "play-circle"]').text-secondary.btn-font
-        b-col(cols='4')
+              //- br
+              //- font-awesome-icon(:icon='["fas", "play-circle"]').text-secondary.btn-font
+        b-col(cols='12' lg='4')
           //- 待辦
           h1.font-current {{ current }}
           //- 開始時 要加入背景圖片判斷
-          img(:src='require("../assets/img/deco-tree.png")')
+          img(:src='require("../assets/img/deco-tree.png")').img-deco
+          //- 手機板會爆掉 待調整
 </template>
 
 <script>
