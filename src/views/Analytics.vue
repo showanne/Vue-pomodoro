@@ -16,16 +16,17 @@
                 //- | AnalyticsToday
                 b-row
                   b-col(cols='12' lg='4').pr-3
-                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                      img(:src='require("../assets/img/action-arrow-left.png")')
-                    | 2021-06-23
-                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                      img(:src='require("../assets/img/action-arrow-right.png")')
+                    p.pl-2
+                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                        img(:src='require("../assets/img/action-arrow-left.png")')
+                      | 2021-06-23
+                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                        img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
-                    p Pomodoros : 0
-                    p Tasks : {{ list.length + finished.length }}
-                    p Completed : {{ finished.length }}
-                    p Focus time : 3h20m
+                    p.pl-4 Pomodoros : 0
+                    p.pl-4 Tasks : {{ list.length + finished.length }}
+                    p.pl-4 Completed : {{ finished.length }}
+                    p.pl-4 Focus time : 3h20m
                   b-col(cols='12' lg='8').px-5
                     b-table-simple(table-variant="primary").bg-transparent.text-secondary
                         tr(v-for='(item, idx) in finished' :key='idx')
@@ -39,16 +40,17 @@
                 //- | AnalyticsWeekly
                 b-row
                   b-col(cols='12' lg='4').pr-3
-                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                      img(:src='require("../assets/img/action-arrow-left.png")')
-                    | 2021-06-23~2021/07/23
-                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                      img(:src='require("../assets/img/action-arrow-right.png")')
+                    p.pl-2
+                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                        img(:src='require("../assets/img/action-arrow-left.png")')
+                      | 2021-06-23~2021/07/23
+                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                        img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
-                    p Pomodoros : 46
-                    p Tasks : 15
-                    p Completed : 7
-                    p Focus time : 19h10m
+                    p.pl-4 Pomodoros : 46
+                    p.pl-4 Tasks : 15
+                    p.pl-4 Completed : 7
+                    p.pl-4 Focus time : 19h10m
                   b-col(cols='12' lg='8').px-5
                     #chart
                       apexchart(type='bar' width='550' :options='chartOptions' :series='series')
