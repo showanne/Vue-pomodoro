@@ -40,11 +40,11 @@ export default new Vuex.Store({
       // state.list.push(data)
       state.list.push({
         // 待辦事項                                       [資料庫欄位]
-        todo: data,
+        todo: data.todo,
         // 新增待辦事項的日期 "2021/6/21"，由系統自行帶入  [資料庫欄位]
         date: new Date().toLocaleDateString('zh-tw'),
         // 期限                                            [資料庫欄位]
-        deadline: '',
+        deadline: data.deadline,
         // 是否已完成 預設為 false                         [資料庫欄位]
         check: false,
         // 是否在編輯 預設為 false

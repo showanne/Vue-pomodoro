@@ -155,16 +155,18 @@
   background #0A3125 0% 0% no-repeat padding-box
   border 1px solid #CACEAC
   border-radius 4px
-.taskInput::placeholder
-  font italic normal normal 18px/21px Arimo
-  // font：font-style font-weight font-size/line-height font-family
-  letter-spacing 0px
-  color #407061
 .taskInput:focus 
     color #caceac
     background-color transparent
     border-color #caceac
     box-shadow none
+.taskDatepicker
+  height 40px
+.taskInput::placeholder, .taskDatepicker::placeholder
+  font italic normal normal 18px/21px Arimo
+  // font：font-style font-weight font-size/line-height font-family
+  letter-spacing 0px
+  color #407061
 .taskBtn
   width 155px
   height 40px
