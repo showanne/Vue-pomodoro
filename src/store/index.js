@@ -25,8 +25,7 @@ export default new Vuex.Store({
     timeleft: time,
     // 判斷是不是休息時間
     isBreak: false,
-    imgTime: 'iconmonstr-marketing-4.png',
-    imgTimeBreak: 'tree.png',
+    imgCountdown: 'deco-target.png',
     // 倒數的狀態 0=停止 1=倒數中 2=暫停
     status: 0
   },
@@ -102,10 +101,12 @@ export default new Vuex.Store({
         // 如果是休息時間顯示 ''
         state.current = 'Time to Take a break'
         // 開始時 要加入背景圖片判斷
+        state.imgCountdown = 'deco-tree.png'
       } else {
         // 不是休息時間 開始時，將 list 的第一筆(.shift() )放入
         state.current = state.list.shift().todo
         // 開始時 要加入背景圖片判斷
+        state.imgCountdown = 'deco-target.png'
       }
     },
     // 更改狀態
@@ -124,7 +125,9 @@ export default new Vuex.Store({
         state.finished.push(state.current)
       }
       // 結束後，沒有待辦事項時，顯示 'unknown task'
+      // if (state.list.length = 0) {
       state.current = 'unknown task'
+      // }
       // 如果待辦清單list 內有資料時
       if (state.list.length > 0) {
         // 切換休息狀態

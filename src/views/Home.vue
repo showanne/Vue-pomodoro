@@ -70,6 +70,17 @@ export default {
       // }
       return 'Start Pomodoro'
     }
+  },
+  methods: {
+    OnOff (checked) {
+      if (!checked) {
+        // audio.play()
+        alert('play')
+      } else {
+        // audio.pause()
+        alert('pause')
+      }
+    }
   }
 }
 </script>
