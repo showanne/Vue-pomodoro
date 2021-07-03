@@ -5,7 +5,19 @@
       .checkBell.d-inline-block.align-middle
           span
             input(type='checkbox' name='checkBell' v-model='checked' @click='OnOff(checked)')
-    b-container.vh-100.py-9
+    b-container.vh-100.py-5
+      b-row
+        b-col(cols='12' lg='8').d-flex.justify-content-center
+          b-tabs(
+                active-nav-item-class='font-weight-bold text-capitalize text-secondary bg-transparent'
+                active-tab-class='text-secondary bg-transparent'
+                content-class='mt-5' pills)
+                //- active-nav-item-class='' 上方分頁標籤樣式
+                //- active-tab-class='' 內容區樣式
+                //- content-class='' 分頁標籤與內容區的間距
+                //- mt-5 -> 3rem；設計稿是 ?rem = ?px
+                b-tab(title='Pomodoro')
+                b-tab(title='Short Break')
       b-row
         b-col(cols='12' lg='8').d-flex.justify-content-center.align-items-center.flex-column
           b-btn(variant='secondary' to='/home/pomodoro').my-3 {{ btnStartText }}
