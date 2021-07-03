@@ -23,7 +23,7 @@
           //- 待辦
           h1.font-current {{ current }}
           //- 開始時 要加入背景圖片判斷
-          img(:src='require("../assets/img/deco-tree.png")').img-deco
+          img(:src='require("../assets/img/" + imgCountdown)').img-deco
           //- 手機板會爆掉 待調整
 </template>
 
@@ -47,20 +47,10 @@ export default {
     current () {
       return this.$store.state.current
     },
+    imgCountdown () {
+      return this.$store.state.imgCountdown
+    },
     // 其他 function ------
-    // btnStartText () {
-    //   let text = ''
-    //   // 如果 this.current 長度為 0
-    //   if (this.current.length === 0) {
-    //     // 如果 list 長度為 0
-    //     if (this.list.length === 0) {
-    //       text = 'unknown task'
-    //     } else {
-    //       text = 'Start Pomodoro'
-    //     }
-    //   }
-    //   return text
-    // },
     timeleft () {
       return this.$store.state.timeleft
     },

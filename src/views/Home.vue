@@ -4,7 +4,7 @@
       img(:src='require("../assets/img/bell.png")').align-middle
       .checkBell.d-inline-block.align-middle
           span
-            input(type='checkbox' name='checkBell' checked)
+            input(type='checkbox' name='checkBell' v-model='checked' @click='OnOff(checked)')
     b-container.vh-100.py-9
       b-row
         b-col(cols='12' lg='8').d-flex.justify-content-center.align-items-center.flex-column
@@ -37,6 +37,11 @@
 <script>
 export default {
   name: 'Home',
+  data () {
+    return {
+      checked: true
+    }
+  },
   computed: {
     // 將變數從  \store\index.js 拉過來 return this.$store.state.XXX
     // status () {
@@ -51,19 +56,19 @@ export default {
     // 其他 function ------
     btnStartText () {
       // console.log(this.current.length)
-      let text
+      // let text
       // 如果 this.current 長度為 0
-      if (this.current.length === 0) {
-        // 如果 list 長度為 0
-        if (this.list.length === 0) {
-          text = 'unknown task'
-        } else {
-          text = 'Start Pomodoro'
-        }
-      } else if (this.current === 'unknown task') {
-        text = 'unknown task'
-      }
-      return text
+      // if (this.current.length === 0) {
+      //   // 如果 list 長度為 0
+      //   if (this.list.length === 0) {
+      //     text = 'unknown task'
+      //   } else {
+      //     text = 'Start Pomodoro'
+      //   }
+      // } else if (this.current === 'unknown task') {
+      //   text = 'unknown task'
+      // }
+      return 'Start Pomodoro'
     }
   }
 }
