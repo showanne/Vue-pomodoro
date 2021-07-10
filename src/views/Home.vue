@@ -86,10 +86,14 @@ export default {
   methods: {
     OnOff (checked) {
       if (!checked) {
-        // audio.play()
+        // const audio = new Audio()
+        // audio.src = require('../assets/mp3/' + this.$store.state.sound)
+        // audio.muted = false
         alert('play')
       } else {
-        // audio.pause()
+        // const audio = new Audio()
+        // audio.src = require('../assets/mp3/' + this.$store.state.sound)
+        // audio.muted = true
         alert('pause')
       }
     }
