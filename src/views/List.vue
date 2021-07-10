@@ -54,7 +54,7 @@
             tbody
               tr(v-for='(item, idx) in finished' :key='idx')
                 td {{ item.done }}
-                td {{ item.date }}
+                td {{ item.finishedDate }}
                 td
                   b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
                     img(:src='require("../assets/img/action-remove.png")')
@@ -118,6 +118,10 @@ export default {
   computed: {
     // 輸入文字長度 判斷
     state () {
+      // console.log(this.newitem)
+      // console.log(this.newitem.length)
+      // console.log(this.newitem.todo)
+      // console.log(this.newitem.todo.length)
       if (this.newitem.length === 0) {
         return null
         // 什麼都沒有!
@@ -180,6 +184,8 @@ export default {
       this.$store.commit('canceLlist', index)
     },
     delfinish (index) {
+      // console.log(this)
+      // console.log(index)
       this.$store.commit('delFinish', index)
     }
   }

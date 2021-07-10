@@ -122,7 +122,10 @@ export default new Vuex.Store({
       // 判斷不是休息時間，再將 state.current 放入 finished ，否則 'Time to Take a break' 也會被放入完成清單
       if (!state.isBreak) {
         // 完成時，將目前的待辦事項放入完成清單
-        state.finished.push(state.current)
+        state.finished.push({
+          done: state.current,
+          finishedDate: new Date().toLocaleDateString('zh-tw')
+        })
       }
       // 結束後，沒有待辦事項時，顯示 'unknown task'
       // if (state.list.length = 0) {
@@ -146,12 +149,13 @@ export default new Vuex.Store({
     },
     // 將已完成的待辦 放進表格
     delFinish (state, data) {
-      state.finished.push({
-        // 完成的待辦事項
-        done: state.finished.splice(data, 1),
-        // 完成待辦事項的日期
-        date: new Date().toLocaleDateString('zh-tw')
-      })
+      state.finished.splice(data, 1)
+      // state.finished.push({
+      // 完成的待辦事項
+      // done: state.finished.splice(data, 1)
+      // 完成待辦事項的日期
+      // date: new Date().toLocaleDateString('zh-tw')
+      // })
     }
   },
   // 獲取資料的 function，getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
