@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b83f2327aab92f8e8361",
+    "revision": "5163eb39540c413ae18e",
     "url": "css/app.7c0b213c.css"
   },
   {
@@ -76,7 +76,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/navbar-timer2.30f52dda.png"
   },
   {
-    "revision": "3f8817e2eba1dc1c71a937bc566435d1",
+    "revision": "ea4595a3bca835517becb10616d301aa",
     "url": "index.html"
   },
   {
@@ -92,16 +92,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/analytics.57b5f84d.js"
   },
   {
-    "revision": "b83f2327aab92f8e8361",
-    "url": "js/app.3a2b33f1.js"
+    "revision": "5163eb39540c413ae18e",
+    "url": "js/app.32eb9bca.js"
   },
   {
     "revision": "edaf05505c4a38faa590",
     "url": "js/chunk-vendors.41b254f8.js"
   },
   {
-    "revision": "37771e5377e3681f201a",
-    "url": "js/home-Pomodoro.8b644043.js"
+    "revision": "4d1d7037605f9f89c066",
+    "url": "js/home-Pomodoro.e35817b2.js"
   },
   {
     "revision": "6d2bdc998085f99b9e86",
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "js/list-Todo.99f9e8d3.js"
   },
   {
-    "revision": "c4733f07e39ced4fa89f",
-    "url": "js/list.77844c3b.js"
+    "revision": "ce2dc44ed667371e5e24",
+    "url": "js/list.26d84591.js"
   },
   {
     "revision": "5c1994ca27fcfef3eecf",
