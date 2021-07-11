@@ -50,10 +50,13 @@ export default {
     imgCountdown () {
       return this.$store.state.imgCountdown
     },
-    // 其他 function ------
     timeleft () {
       return this.$store.state.timeleft
     },
+    isBreak () {
+      return this.$store.state.isBreak
+    },
+    // 其他 function ------
     timeText () {
       // 目前剩幾分
       const m = Math.floor(this.timeleft / 60)
@@ -99,18 +102,27 @@ export default {
         const audio = new Audio()
         audio.src = require('../assets/mp3/' + this.$store.state.sound)
         audio.play()
+        if (this.isBreak) {
+          // 結束時
+          this.$swal({
+            icon: 'success',
+            title: '恭喜你吃完一顆番茄 '
+          })
+          // 同時要做 Pomodoro 次數計算
+        }
       }
 
       // 結束時，如果待辦清單內還有資料，繼續重新開始
       if (this.list.length > 0) {
         this.start()
-      } else {
-        // 結束時，如果待辦清單內沒有資料，就送出結束訊息
-        this.$swal({
-          icon: 'success',
-          title: '恭喜完成你吃完一顆番茄'
-        })
       }
+      // else {
+      // 結束時，如果待辦清單內沒有資料，就送出結束訊息
+      // this.$swal({
+      //   icon: 'success',
+      //   title: '恭喜完成你吃完一顆番茄'
+      // })
+      // }
     },
     pause () {
       // 將倒數狀態清除
