@@ -58,10 +58,14 @@ export default {
     },
     // 其他 function ------
     timeText () {
+      // NumberFormatter(Math.floor(this.timeleft / 60), { minimumIntegerDigits: 2 })
+      // x.toLocaleString(undefined, { minimumIntegerDigits: 2 })
+
       // 目前剩幾分
-      const m = Math.floor(this.timeleft / 60)
+      const m = Math.floor(this.timeleft / 60).toLocaleString(undefined, { minimumIntegerDigits: 2 })
       // 目前剩幾秒， % 取餘數
-      const s = Math.floor(this.timeleft % 60)
+      const s = Math.floor(this.timeleft % 60).toLocaleString(undefined, { minimumIntegerDigits: 2 })
+
       return `${m} : ${s}`
     }
   },
