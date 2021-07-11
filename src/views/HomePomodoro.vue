@@ -96,20 +96,23 @@ export default {
       this.$store.commit('changeStatus', 0)
       this.$store.commit('addFinish')
 
+      // 不是休息時間的結束會跳出 alert，略過的也算完成
+      // 當清單內沒有其他待辦時最後一個待辦事項完成也會跳 alert
+      if (this.isBreak || this.list.length === 0) {
+        this.$swal({
+          icon: 'success',
+          title: '恭喜你吃完一顆番茄 '
+        })
+        // 同時要做 Pomodoro 次數計算
+        // this.$store.commit('timesCalc')
+      }
+
       // 如果不是按按鈕跳過的結束
       if (!skip) {
         // 結束時，播完成音效
         const audio = new Audio()
         audio.src = require('../assets/mp3/' + this.$store.state.sound)
         audio.play()
-        if (this.isBreak) {
-          // 結束時
-          this.$swal({
-            icon: 'success',
-            title: '恭喜你吃完一顆番茄 '
-          })
-          // 同時要做 Pomodoro 次數計算
-        }
       }
 
       // 結束時，如果待辦清單內還有資料，繼續重新開始

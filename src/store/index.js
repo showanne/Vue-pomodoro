@@ -157,6 +157,10 @@ export default new Vuex.Store({
       // date: new Date().toLocaleDateString('zh-tw')
       // })
     }
+    // 計算 Pomodoro 次數
+    // timesCalc (state) {
+    //   state.list[0].times++
+    // }
   },
   // 獲取資料的 function，getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
   getters: {
