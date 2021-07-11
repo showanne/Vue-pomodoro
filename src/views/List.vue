@@ -74,21 +74,21 @@
                 //- @keydown.enter='additem'
               //- div
               //-   label(for='datepicker-valid') 期限
-            b-form-datepicker(
-              v-model='newitem.deadline'
-              :state='true'
-              label-no-date-selected='請選擇一個日期'
-              label-help=''
-              today-button
-              label-today-button='今天'
-              reset-button
-              label-reset-button='重設'
-              close-button
-              label-close-button='關閉'
-              placeholder="YYYY-MM-DD"
-              :date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }'
-              ).bg-transparent.taskDatepicker
-            b-btn(type='submit' variant="secondary").taskBtn Add task
+              b-form-datepicker(
+                v-model='newitem.deadline'
+                :state='true'
+                label-no-date-selected='請選擇一個日期'
+                label-help=''
+                today-button
+                label-today-button='今天'
+                reset-button
+                label-reset-button='重設'
+                close-button
+                label-close-button='關閉'
+                placeholder="YYYY-MM-DD"
+                :date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }'
+                ).bg-transparent.taskDatepicker
+              b-btn(type='submit' variant="secondary").taskBtn Add task
             //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
           div.mt-3.text-center
             p.text-mute.font-listnone.my-5 Let’s start something fun
@@ -121,11 +121,11 @@ export default {
       // console.log(this.newitem)
       // console.log(this.newitem.length)
       // console.log(this.newitem.todo)
-      // console.log(this.newitem.todo.length)
-      if (this.newitem.length === 0) {
+      console.log(this.newitem.todo.length)
+      if (this.newitem.todo.length === 0) {
         return null
         // 什麼都沒有!
-      } else if (this.newitem.length < 2) {
+      } else if (this.newitem.todo.length < 2) {
         return false
         // 驗證訊息樣式 紅色 ×
       } else {
@@ -152,13 +152,14 @@ export default {
     // 新增待辦
     additem () {
       // console.log(this.state)
-      // console.log(this.newitem)
+      console.log(this.newitem)
       // 判斷有沒有輸入東西
       if (this.state) {
         // 呼叫 \store\index.js 內的 mutations 的 addList function 將 this.newitem 值帶入
         this.$store.commit('addList', this.newitem)
         // 清空輸入欄位
-        this.newitem = ''
+        this.newitem.todo = ''
+        this.newitem.deadline = ''
       } else {
         // 沒有輸入東西就送出會跳警示訊息
         this.$swal({

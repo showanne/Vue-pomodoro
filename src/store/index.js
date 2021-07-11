@@ -49,7 +49,7 @@ export default new Vuex.Store({
         // 是否在編輯 預設為 false
         edit: false,
         // 編輯前的待辦事項
-        todoEdit: data,
+        todoEdit: data.todo,
 
         // 次數，由系統計入一個待辦事項做了幾次             [資料庫欄位]
         // Analytics 和 List 頁面 todo 下方的圓點
