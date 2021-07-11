@@ -74,21 +74,22 @@
                 //- @keydown.enter='additem'
               //- div
               //-   label(for='datepicker-valid') 期限
-              b-form-datepicker(
-                v-model='newitem.deadline'
-                :state='true'
-                label-no-date-selected='請選擇一個日期'
-                label-help=''
-                today-button
-                label-today-button='今天'
-                reset-button
-                label-reset-button='重設'
-                close-button
-                label-close-button='關閉'
-                placeholder="YYYY-MM-DD"
-                :date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }'
-                ).bg-transparent.taskDatepicker
-              b-btn(type='submit' variant="secondary").taskBtn Add task
+            b-form-datepicker(
+              v-model='newitem.deadline'
+              label-no-date-selected='請選擇一個日期'
+              label-help=''
+              placeholder="YYYY-MM-DD"
+              :date-format-options='{ year: \'numeric\', month: \'numeric\', day: \'numeric\' }'
+              menu-class="mt-1"
+              class="w-Datepicker d-inline-flex"
+              ).bg-transparent.taskDatepicker
+              //- today-button
+              //- label-today-button='今天'
+              //- reset-button
+              //- label-reset-button='重設'
+              //- close-button
+              //- label-close-button='關閉'
+            b-btn(type='submit' variant="secondary").taskBtn Add task
             //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
           div.mt-3.text-center
             p.text-mute.font-listnone.my-5 Let’s start something fun

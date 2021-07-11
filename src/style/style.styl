@@ -148,25 +148,67 @@
 
 .table tbody + tbody
   border-top 1px solid #407061
-
-.taskInput
-  // width 410px
-  height 50px
+// 為了 b-form 內的 Input 和 Datepicker 排列
+// .form-group div:nth-child(1)
+//   display: -webkit-box !important;
+//   display: -ms-flexbox !important;
+//   display: flex !important;
+//   -webkit-box-orient: horizontal !important;
+//   -webkit-box-direction: normal !important;
+//   -ms-flex-direction: row !important;
+//   flex-direction: row !important;
+// .form-group .taskInput, .taskDatepicker
+//   -webkit-box-flex: 0;
+//   -ms-flex: 0 0 50%;
+//   flex: 0 0 50%;
+//   max-width: 50%;
+// .form-group div:nth-child(3)
+//   display: block !important;
+//   -webkit-box-flex: 0;
+//   -ms-flex: 0 0 100%;
+//   flex: 0 0 100%;
+//   max-width: 100%;
+.taskInput, .taskDatepicker
+  // display inline-block
+  // width 49%
+  height 50px !important
+  margin-right 1rem
   background #0A3125 0% 0% no-repeat padding-box
   border 1px solid #CACEAC
   border-radius 4px
-.taskInput:focus 
+  &:focus 
     color #caceac
     background-color transparent
     border-color #caceac
     box-shadow none
-.taskDatepicker
-  height 40px
-.taskInput::placeholder, .taskDatepicker::placeholder
+.taskInput::placeholder
+  // .taskDatepicker .form-control, .taskDatepicker .btn
+  color #407061
   font italic normal normal 18px/21px Arimo
   // font：font-style font-weight font-size/line-height font-family
   letter-spacing 0px
-  color #407061
+// .taskDatepicker
+//   line-height 50px !important
+
+.taskDatepicker .form-control, .taskDatepicker .btn
+  vertical-align baseline !important
+  color #407061 !important
+.taskDatepicker label.form-control
+  font-size 18px !important
+  font-style italic
+  line-height 36px
+  text-align left
+  margin-left 1.25rem !important
+  // line-height 33px !important  // 加了這個日期選擇會當掉
+  // vertical-align middle
+// .taskDatepickerMenu
+//   font-size 1rem
+// .taskDatepickerMenu .b-calendar .b-calendar-inner
+  // font-size 100% !important
+  // width auto !important
+  // vertical-align none !important
+.w-Datepicker
+  width calc(100% - 172px)
 .taskBtn
   width 155px
   height 40px
