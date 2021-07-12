@@ -32,6 +32,8 @@ import VueSweetalert2 from 'vue-sweetalert2'
 // 引用 vue-sweetalert2 styles
 import 'sweetalert2/dist/sweetalert2.min.css'
 
+// 全域引用 mixin，這樣各分頁要是用變數就可以直接使用
+import mixin from './mixin.js'
 // ----- ESLint 規定 import 放上方 -----
 
 // FontAwesome 根據 icon 的種類引用
@@ -49,6 +51,9 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // sweetalert2 註冊元件
 Vue.use(VueSweetalert2)
+
+// 全域引用 mixin，這樣各分頁要是要用變數就可以直接使用
+Vue.mixin(mixin)
 
 Vue.config.productionTip = false
 

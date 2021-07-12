@@ -16,25 +16,25 @@
                 //- | AnalyticsToday
                 b-row
                   b-col(cols='12' lg='4').pr-3
-                    p.pl-2
+                    p.pl-2.align-baseline
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-left.png")')
-                      | 2021-06-23
+                      span.font-weight-bold.px-3 {{ formatDate(today) }}
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
                     p.pl-4 Pomodoros : 0
                     p.pl-4 Tasks : {{ list.length + finished.length }}
                     p.pl-4 Completed : {{ finished.length }}
-                    p.pl-4 Focus time : 3h20m
+                    p.pl-4 Focus time : {{ finished.length * 25 }}m
                   b-col(cols='12' lg='8').px-5
                     b-table-simple(table-variant="primary").bg-transparent.text-secondary
                         tr(v-for='(item, idx) in finished' :key='idx')
                           td
                             span {{ item.done }}
                             br
-                            span ●●●
-                          td {{ item.done.length * 25 }}min
+                            span {{ timesDotCalc(item.done.length) }}
+                          td {{ timesMinCalc(item.done.length) }}min
                           //- {{ item.length }}
               b-tab(title='Weekly')
                 //- | AnalyticsWeekly
@@ -61,6 +61,7 @@ export default {
   name: 'AnalyticsWeekly',
   data () {
     return {
+      // today: new Date().toLocaleDateString('zh-tw').Format('yyyy-MM-dd'),
       series: [
         {
           name: 'WeeklyChart',
@@ -175,6 +176,9 @@ export default {
     }
   },
   computed: {
+    today () {
+      return this.$store.state.today
+    },
     list () {
       // console.log(this.$store.state.list.length)
       return this.$store.state.list
@@ -182,6 +186,26 @@ export default {
     finished () {
       // console.log(this.$store.state.finished.length)
       return this.$store.state.finished
+    }
+  },
+  methods: {
+    timesDotCalc (D) {
+      // console.log(D)
+      let dot = ''
+      for (let i = 1; i <= D; i++) {
+        // console.log(i)
+        dot += '●'
+      }
+      return dot
+    },
+    timesMinCalc (M) {
+      // console.log(M)
+      let Min = 0
+      for (let i = 1; i <= M; i++) {
+        // console.log(i)
+        Min += 25
+      }
+      return Min
     }
   }
   // ,

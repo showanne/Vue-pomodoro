@@ -7,11 +7,7 @@
           h1.mb-2 Todo
           b-table(:items='list' :fields='listfields').text-secondary
             template(#cell(check)='data')
-              input(type='checkbox' v-model='data.item.check')
-              //- .checkTodo
-              //-   span
-              //-     input(type='radio' name='checkTodo')
-                  //- input(type='radio' name='radio' checked)
+              input(type='radio' v-model='data.item.check')
             template(#cell(todo)='data')
               b-form-input(
                 v-if='data.item.edit'
@@ -24,6 +20,8 @@
               )
               //- 雙擊欄位開啟編輯模式 @dblclick='editlist(data.index)'
               span(v-else) {{ data.value }}
+            template(#cell(date)="data")
+              | {{ formatDate(data.value)}}
             template(#cell(edit)='data')
               //- 如果不是編輯模式 顯示
               span(v-if='!data.item.edit')
@@ -54,7 +52,7 @@
             tbody
               tr(v-for='(item, idx) in finished' :key='idx')
                 td {{ item.done }}
-                td {{ item.finishedDate }}
+                td {{ formatDate(item.finishedDate) }}
                 td
                   b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
                     img(:src='require("../assets/img/action-remove.png")')

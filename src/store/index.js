@@ -17,6 +17,8 @@ export default new Vuex.Store({
     sound: 'alarm.mp3',
     // 預設鈴聲開關 true 是 開
     soundOn: true,
+    // 今天
+    today: new Date().toLocaleDateString('zh-tw'),
     // 待辦清單
     list: [],
     // 完成清單，list 完成的資料會移入此
@@ -45,7 +47,7 @@ export default new Vuex.Store({
       state.list.push({
         // 待辦事項                                       [資料庫欄位]
         todo: data.todo,
-        // 新增待辦事項的日期 "2021/6/21"，由系統自行帶入  [資料庫欄位]
+        // 新增待辦事項的日期，由系統自行帶入  [資料庫欄位]
         date: new Date().toLocaleDateString('zh-tw'),
         // 期限                                            [資料庫欄位]
         deadline: data.deadline,
@@ -129,7 +131,7 @@ export default new Vuex.Store({
         // 完成時，將目前的待辦事項放入完成清單
         state.finished.push({
           done: state.current,
-          finishedDate: new Date().toLocaleDateString('zh-tw')
+          finishedDate: this.state.today
         })
       }
       // 結束後，沒有待辦事項時，顯示 'unknown task'
