@@ -1,24 +1,8 @@
 # pomodoro
 
-## Project setup
-```
-npm install
-```
+## Project
+- [精神時光屋個人檔案](https://challenge.thef2e.com/user/4146?schedule=4558)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- [Github](https://showanne.github.io/Vue-pomodoro/)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [精神時光屋 - 參考設計稿](https://challenge.thef2e.com/user/1461?schedule=2559#works-2559)
