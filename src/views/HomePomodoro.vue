@@ -113,10 +113,16 @@ export default {
 
       // 如果不是按按鈕跳過的結束
       if (!skip) {
-        // 結束時，播完成音效
         const audio = new Audio()
         audio.src = require('../assets/mp3/' + this.$store.state.sound)
-        audio.play()
+        // 如果鈴聲開關是開
+        if (this.$store.state.soundOn) {
+          // 結束時，播完成音效
+          audio.play()
+        } else {
+          // 結束時，不播完成音效
+          audio.pause()
+        }
       }
 
       // 結束時，如果待辦清單內還有資料，繼續重新開始

@@ -15,6 +15,8 @@ export default new Vuex.Store({
   state: {
     // 設定預設鈴聲
     sound: 'alarm.mp3',
+    // 預設鈴聲開關 true 是 開
+    soundOn: true,
     // 待辦清單
     list: [],
     // 完成清單，list 完成的資料會移入此
@@ -34,6 +36,9 @@ export default new Vuex.Store({
     //  function (state 就是上面的 , data 是想丟進 function 的值)
     selectSound (state, data) {
       state.sound = data
+    },
+    SoundOnOff (state, data) {
+      state.soundOn = data
     },
     addList (state, data) {
       // state.list.push(data)
