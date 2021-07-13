@@ -104,13 +104,14 @@ input {
   display: block;
   margin: 36px;
 }
-input[type=radio], input[type=checkbox] {
+/* input[type=radio],  */
+input[type=checkbox] {
   cursor: pointer;
   width: 30px;
   height: 30px;
 }
 
-/* .checkTodo, .checkBell {
+/* .checkBell {
   position: absolute;
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -120,8 +121,10 @@ input[type=radio], input[type=checkbox] {
   left: 50%;
 } */
 
-.checkTodo {
-  margin-left: -36px;
+input[type=radio] {
+  /* margin-left: -36px; */
+  width: 19px;
+  height: 19px;
 }
 
 .checkBell {

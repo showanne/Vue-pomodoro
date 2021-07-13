@@ -132,7 +132,7 @@ export default new Vuex.Store({
           done: state.current,
           // 完成待辦事項的日期， 0 是今天 給 DateCalc()計算
           finishedDate: 0,
-          times: 0
+          times: this.list.times
         })
       }
       // 結束後，沒有待辦事項時，顯示 'unknown task'

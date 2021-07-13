@@ -5,57 +5,67 @@
         b-col(cols='12' lg='6').p-3
           //- h1.mb-2 待辦清單
           h1.mb-2 Todo
-          b-table(:items='list' :fields='listfields').text-secondary
-            template(#cell(check)='data')
-              input(type='radio' v-model='data.item.check')
-            template(#cell(todo)='data')
-              b-form-input(
-                v-if='data.item.edit'
-                v-model='data.item.todoEdit'
-                trim
-                :state='data.item.state'
-                @dblclick='data.item.edit=true'
-                @keydown.enter='changelist(data.index)'
-                @keydown.esc='cancellist(data.index)'
-              )
-              //- 雙擊欄位開啟編輯模式 @dblclick='editlist(data.index)'
-              span(v-else) {{ data.value }}
-            template(#cell(date)="data")
-              | {{ formatDate(data.value)}}
-            template(#cell(edit)='data')
-              //- 如果不是編輯模式 顯示
-              span(v-if='!data.item.edit')
-                b-btn(variant="primary" @click='editlist(data.index)').rounded-circle.px-1.py-0
-                  font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
-                b-btn(variant="primary" @click='dellist(data.index)').rounded-circle.px-1.py-0.actionBtn
+          b-table-simple(table-variant="primary").bg-transparent.text-secondary
+            tr(v-for='(Litem, idx) in list' :key='idx')
+              td
+                input(type='radio' v-model='Litem.check')
+              td.w-50
+                b-form-input(
+                  v-if='Litem.edit'
+                  v-model='Litem.todoEdit'
+                  trim
+                  :state='Litem.state'
+                  @dblclick='Litem.edit=true'
+                  @keydown.enter='changelist(idx)'
+                  @keydown.esc='cancellist(idx)'
+                )
+                span(v-else) {{ Litem.todo }}
+                br
+                span {{ timesDotCalc(Litem.times) }}
+              td {{ DateCalc(Litem.date) }}
+              td {{ Litem.deadline }}
+              td.w-25
+                //- 編輯
+                //- 如果不是編輯模式 顯示
+                span(v-if='!Litem.edit')
+                  b-btn(variant="primary" @click='editlist(idx)').rounded-circle.px-1.py-0
+                    font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
+                  b-btn(variant="primary" @click='dellist(idx)').rounded-circle.px-1.py-0.actionBtn
+                    img(:src='require("../assets/img/action-remove.png")')
+                //- 如果是編輯模式 顯示
+                span(v-else)
+                  b-btn(variant="primary" @click='changelist(idx)').rounded-circle.px-1.py-0
+                    font-awesome-icon(:icon='["fas", "check"]').btn-font
+                  b-btn(variant="primary" @click='cancellist(idx)').rounded-circle.px-1.py-0
+                    font-awesome-icon(:icon='["fas", "undo"]').btn-font
+                //- 移除
+                b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
                   img(:src='require("../assets/img/action-remove.png")')
-              //- 如果是編輯模式 顯示
-              span(v-else)
-                b-btn(variant="primary" @click='changelist(data.index)').rounded-circle.px-1.py-0
-                  font-awesome-icon(:icon='["fas", "check"]').btn-font
-                b-btn(variant="primary" @click='cancellist(data.index)').rounded-circle.px-1.py-0
-                  font-awesome-icon(:icon='["fas", "undo"]').btn-font
-            template(#cell(action)='data')
-              b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                img(:src='require("../assets/img/action-arrow-up.png")')
-              b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                img(:src='require("../assets/img/action-arrow-down.png")')
-              b-btn(variant="primary" @click='' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
-                img(:src='require("../assets/img/action-log-out.png")')
+                //- 上移
+                b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                  img(:src='require("../assets/img/action-arrow-up.png")')
+                //- 下移
+                b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                  img(:src='require("../assets/img/action-arrow-down.png")')
+                //- 移至待辦事項
+                b-btn(variant="primary" @click='' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
+                  img(:src='require("../assets/img/action-log-out.png")')
           h1.my-2 Done
           b-table-simple(table-variant="primary").bg-transparent.text-secondary
-            thead
-              tr
-                th 已完成待辦事項
-                th 完成日期
-                th 操作
-            tbody
-              tr(v-for='(item, idx) in finished' :key='idx')
-                td {{ item.done }}
-                td {{ formatDate(item.finishedDate) }}
-                td
-                  b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
-                    img(:src='require("../assets/img/action-remove.png")')
+            //- thead
+            //-   tr
+            //-     th 已完成待辦事項
+            //-     th 完成日期
+            //-     th 操作
+            //- tbody
+            tr(v-for='(item, idx) in finished' :key='idx')
+              td.w-75 {{ item.done }}
+                br
+                span {{ timesDotCalc(item.times) }}
+              td.w-25 {{ DateCalc(item.finishedDate) }}
+              //- td.w-25
+              //-   b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
+              //-     img(:src='require("../assets/img/action-remove.png")')
         b-col(cols='12' lg='6').p-3.text-right
           //- h1.mb-2.text-left 新增事項
           b-form(@submit.prevent="additem")
@@ -106,6 +116,7 @@ export default {
       deadline: '',
       listfields: [
         { key: 'check', label: '勾選' },
+        { key: 'times', label: '' },
         { key: 'todo', label: '待辦事項' },
         { key: 'date', label: '新增日期' },
         { key: 'deadline', label: '期限' },
@@ -120,7 +131,7 @@ export default {
       // console.log(this.newitem)
       // console.log(this.newitem.length)
       // console.log(this.newitem.todo)
-      console.log(this.newitem.todo.length)
+      // console.log(this.newitem.todo.length)
       if (this.newitem.todo.length === 0) {
         return null
         // 什麼都沒有!
