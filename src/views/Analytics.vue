@@ -23,18 +23,18 @@
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
-                    p.pl-4 Pomodoros : 0
-                    p.pl-4 Tasks : {{ list.length + finished.length }}
-                    p.pl-4 Completed : {{ finished.length }}
-                    p.pl-4 Focus time : {{ finished.length * 25 }}m
+                    p.pl-4 Pomodoros : {{ list[0].times }}
+                    p.pl-4 Tasks : {{ list.length }}
+                    p.pl-4 Completed : {{ list.length }}
+                    p.pl-4 Focus time : {{ list.length * 25 }}m
                   b-col(cols='12' lg='8').px-5
                     b-table-simple(table-variant="primary").bg-transparent.text-secondary
-                        tr(v-for='(item, idx) in finished' :key='idx')
+                        tr(v-for='(item, idx) in list' :key='idx')
                           td
-                            span {{ item.done }}
+                            span {{ item.todo }}
                             br
-                            span {{ timesDotCalc(item.done.length) }}
-                          td {{ timesMinCalc(item.done.length) }}min
+                            span {{ timesDotCalc(list[idx].times) }}
+                          td {{ timesMinCalc(item.todo.length) }}min
                           //- {{ item.length }}
               b-tab(title='Weekly')
                 //- | AnalyticsWeekly
@@ -205,11 +205,11 @@ export default {
     list () {
       // console.log(this.$store.state.list.length)
       return this.$store.state.list
-    },
-    finished () {
-      // console.log(this.$store.state.finished.length)
-      return this.$store.state.finished
     }
+    // finished () {
+    //   // console.log(this.$store.state.finished.length)
+    //   return this.$store.state.finished
+    // }
   },
   methods: {
     DateChart (c) {

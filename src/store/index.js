@@ -22,7 +22,7 @@ export default new Vuex.Store({
     // 待辦清單
     list: [],
     // 完成清單，list 完成的資料會移入此
-    finished: [],
+    // finished: [],
     // 目前的待辦事項
     current: '',
     // 目前的倒數的時間
@@ -51,6 +51,8 @@ export default new Vuex.Store({
         date: 0,
         // 期限
         deadline: data.deadline,
+        // 完成待辦事項的日期
+        finishedDate: '',
         // 是否已完成 預設為 false
         check: false,
         // 是否在編輯 預設為 false
@@ -110,7 +112,8 @@ export default new Vuex.Store({
         state.imgCountdown = 'deco-tree.png'
       } else {
         // 不是休息時間 開始時，將 list 的第一筆(.shift() )放入
-        state.current = state.list.shift().todo
+        // state.current = state.list.shift().todo
+        state.current = state.list[0].todo
         // 開始時 要加入背景圖片判斷
         state.imgCountdown = 'deco-target.png'
       }
@@ -127,18 +130,15 @@ export default new Vuex.Store({
     addFinish (state) {
       // 判斷不是休息時間，再將 state.current 放入 finished ，否則 'Time to Take a break' 也會被放入完成清單
       if (!state.isBreak) {
-        // 完成時，將目前的待辦事項放入完成清單
-        state.finished.push({
-          done: state.current,
-          // 完成待辦事項的日期， 0 是今天 給 DateCalc()計算
-          finishedDate: 0,
-          times: this.list.times
-        })
+        state.list[0].check = true
+        // 完成時，在清單新增完成待辦事項的日期
+        state.list[0].finishedDate = 0
       }
       // 結束後，沒有待辦事項時，顯示 'unknown task'
       // if (state.list.length = 0) {
       state.current = 'unknown task'
       // }
+      // 要改為還有 check true 時 切換休息狀態
       // 如果待辦清單list 內有資料時
       if (state.list.length > 0) {
         // 切換休息狀態
@@ -156,19 +156,19 @@ export default new Vuex.Store({
       // }
     },
     // 將已完成的待辦 放進表格
-    delFinish (state, data) {
-      state.finished.splice(data, 1)
+    // delFinish (state, data) {
+    //   state.finished.splice(data, 1)
       // state.finished.push({
       // 完成的待辦事項
       // done: state.finished.splice(data, 1)
       // 完成待辦事項的日期
       // date: new Date().toLocaleDateString('zh-tw')
       // })
-    }
-    // 計算 Pomodoro 次數
-    // timesCalc (state) {
-    //   state.list[0].times++
     // }
+    // 計算 Pomodoro 次數
+    timesCalc (state) {
+      state.list[0].times++
+    }
   },
   // 獲取資料的 function，getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
   getters: {

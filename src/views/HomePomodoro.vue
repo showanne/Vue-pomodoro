@@ -33,7 +33,12 @@ export default {
   data () {
     return {
       // setInterval 還未開始時，先給一個 timer 值
-      timer: 0
+      timer: 0,
+      finished: {
+        // 0 是今天 給 DateCalc()計算
+        finishedDate: 0,
+        check: true
+      }
     }
   },
   computed: {
@@ -99,17 +104,18 @@ export default {
       // 更改狀態為 0=停止
       this.$store.commit('changeStatus', 0)
       this.$store.commit('addFinish')
+      // 同時要做 Pomodoro 次數計算
+      this.$store.commit('timesCalc')
 
       // 不是休息時間的結束會跳出 alert，略過的也算完成
       // 當清單內沒有其他待辦時最後一個待辦事項完成也會跳 alert
       if (this.isBreak || this.list.length === 0) {
         this.$swal({
           icon: 'success',
-          title: '恭喜你吃完一顆番茄 '
+          title: '恭喜你吃完一顆番茄'
         })
-        // 同時要做 Pomodoro 次數計算
-        // this.$store.commit('timesCalc')
       }
+
 
       // 如果不是按按鈕跳過的結束
       if (!skip) {
@@ -129,13 +135,6 @@ export default {
       if (this.list.length > 0) {
         this.start()
       }
-      // else {
-      // 結束時，如果待辦清單內沒有資料，就送出結束訊息
-      // this.$swal({
-      //   icon: 'success',
-      //   title: '恭喜完成你吃完一顆番茄'
-      // })
-      // }
     },
     pause () {
       // 將倒數狀態清除

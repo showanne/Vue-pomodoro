@@ -113,7 +113,6 @@ export default {
         todo: '',
         deadline: ''
       },
-      deadline: '',
       listfields: [
         { key: 'check', label: '勾選' },
         { key: 'times', label: '' },
@@ -162,7 +161,7 @@ export default {
     // 新增待辦
     additem () {
       // console.log(this.state)
-      console.log(this.newitem)
+      // console.log(this.newitem)
       // 判斷有沒有輸入東西
       if (this.state) {
         // 呼叫 \store\index.js 內的 mutations 的 addList function 將 this.newitem 值帶入
@@ -193,12 +192,12 @@ export default {
     },
     cancellist (index) {
       this.$store.commit('canceLlist', index)
-    },
-    delfinish (index) {
+    }
+    // delfinish (index) {
       // console.log(this)
       // console.log(index)
-      this.$store.commit('delFinish', index)
-    }
+      // this.$store.commit('delFinish', index)
+    // }
   }
 }
 </script>
