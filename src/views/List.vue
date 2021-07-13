@@ -20,7 +20,7 @@
                     b-table-simple(table-variant="primary").bg-transparent.text-secondary
                       tr(v-for='(Litem, idx) in list' :key='idx')
                         td
-                          input(type='radio' v-model='Litem.check' @click='')
+                          input(type='radio' v-model='Litem.check' @click='complete(idx)')
                         td.w-50
                           b-form-input(
                             v-if='Litem.edit'
@@ -202,7 +202,11 @@ export default {
     },
     chooselist (index) {
       this.$store.commit('chooselist', index)
+    },
+    complete (index) {
+      this.$store.commit('complete', index)
     }
+
     // delfinish (index) {
     // console.log(this)
     // console.log(index)

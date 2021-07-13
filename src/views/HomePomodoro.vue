@@ -33,12 +33,7 @@ export default {
   data () {
     return {
       // setInterval 還未開始時，先給一個 timer 值
-      timer: 0,
-      finished: {
-        // 0 是今天 給 DateCalc()計算
-        finishedDate: 0,
-        check: true
-      }
+      timer: 0
     }
   },
   computed: {

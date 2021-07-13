@@ -109,6 +109,11 @@ export default new Vuex.Store({
       state.timeleft = time
       state.isBreak = false
     },
+    complete (state, data) {
+      // DEBUG:不會即時同步到 done
+      console.log(data)
+      state.list[data].check = true
+    },
     // 按 > 開始按鈕時機
     startTodo (state) {
       // 休息狀態判斷
@@ -137,7 +142,7 @@ export default new Vuex.Store({
     addFinish (state) {
       // 判斷不是休息時間，再將 state.current 放入 finished ，否則 'Time to Take a break' 也會被放入完成清單
       if (!state.isBreak) {
-        state.list[state.list_id].check = true
+        // state.list[state.list_id].check = true
         // 完成時，在清單新增完成待辦事項的日期
         state.list[state.list_id].finishedDate = 0
         // 讓倒數順序繼續
