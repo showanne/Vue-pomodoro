@@ -2,71 +2,75 @@
   #list
     b-container.min-vh-100
       b-row.flex-column-reverse.flex-lg-row
-        b-col(cols='12' lg='6').p-3
-          //- h1.mb-2 待辦清單
-          h1.mb-2 Todo
-          b-table-simple(table-variant="primary").bg-transparent.text-secondary
-            tr(v-for='(Litem, idx) in list' :key='idx')
-              td
-                input(type='radio' v-model='Litem.check')
-              td.w-50
-                b-form-input(
-                  v-if='Litem.edit'
-                  v-model='Litem.todoEdit'
-                  trim
-                  :state='Litem.state'
-                  @dblclick='Litem.edit=true'
-                  @keydown.enter='changelist(idx)'
-                  @keydown.esc='cancellist(idx)'
-                )
-                span(v-else) {{ Litem.todo }}
-                br
-                span {{ timesDotCalc(Litem.times) }}
-              td {{ DateCalc(Litem.date) }}
-              td {{ Litem.deadline }}
-              td.w-25.text-right
-                //- --▽-- todo 編輯 --▽--
-                //- 如果不是編輯模式 顯示
-                span(v-if='!Litem.edit')
-                  //- 編輯
-                  b-btn(variant="primary" @click='editlist(idx)').rounded-circle.px-1.py-0
-                    font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
-                  //- 移除
-                  b-btn(variant="primary" @click='dellist(idx)').rounded-circle.px-1.py-0.actionBtn
-                    img(:src='require("../assets/img/action-remove.png")')
-                //- 如果是編輯模式 顯示
-                span(v-else)
-                  b-btn(variant="primary" @click='changelist(idx)').rounded-circle.px-1.py-0
-                    font-awesome-icon(:icon='["fas", "check"]').btn-font
-                  b-btn(variant="primary" @click='cancellist(idx)').rounded-circle.px-1.py-0
-                    font-awesome-icon(:icon='["fas", "undo"]').btn-font
-                //- --△-- todo 編輯 --△--
-                //- 上移
-                b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                  img(:src='require("../assets/img/action-arrow-up.png")')
-                //- 下移
-                b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                  img(:src='require("../assets/img/action-arrow-down.png")')
-                //- 移至待辦事項
-                b-btn(variant="primary" @click='' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
-                  img(:src='require("../assets/img/action-log-out.png")')
-          h1.my-2 Done
-          b-table-simple(table-variant="primary").bg-transparent.text-secondary
-            //- thead
-            //-   tr
-            //-     th 已完成待辦事項
-            //-     th 完成日期
-            //-     th 操作
-            //- tbody
-            tr(v-for='(item, idx) in finished' :key='idx')
-              td.w-75 {{ item.done }}
-                br
-                span {{ timesDotCalc(item.times) }}
-              td.w-25 {{ DateCalc(item.finishedDate) }}
-              //- td.w-25
-              //-   b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
-              //-     img(:src='require("../assets/img/action-remove.png")')
-        b-col(cols='12' lg='6').p-3.text-right
+        b-col(cols='12' lg='7').p-3
+          b-tabs(
+                  active-nav-item-class='font-weight-bold text-capitalize text-secondary bg-transparent'
+                  active-tab-class='text-secondary bg-transparent'
+                  content-class='mt-5' pills)
+                  //- active-nav-item-class='' 上方分頁標籤樣式
+                  //- active-tab-class='' 內容區樣式
+                  //- content-class='' 分頁標籤與內容區的間距
+                  //- mt-5 -> 3rem；設計稿是 ?rem = ?px
+                  b-tab(title='Todo List' disabled).mr-auto.font-analytics
+                  b-tab(title='Todo')
+                    //- h1.mb-2 Todo
+                    div(v-if='this.list.length===0').mt-3.text-center
+                      p.text-mute.font-listnone.my-5 Let’s start something fun
+                      img(:src='require("../assets/img/deco-fun.png")').img-deco
+                    b-table-simple(table-variant="primary").bg-transparent.text-secondary
+                      tr(v-for='(Litem, idx) in list' :key='idx')
+                        td
+                          input(type='radio' v-model='Litem.check' @click='')
+                        td.w-50
+                          b-form-input(
+                            v-if='Litem.edit'
+                            v-model='Litem.todoEdit'
+                            trim
+                            :state='Litem.state'
+                            @dblclick='Litem.edit=true'
+                            @keydown.enter='changelist(idx)'
+                            @keydown.esc='cancellist(idx)'
+                          )
+                          span(v-else) {{ Litem.todo }}
+                          br
+                          span {{ timesDotCalc(Litem.times) }}
+                        td {{ DateCalc(Litem.date) }}
+                        td {{ Litem.deadline }}
+                        td.w-25.text-center
+                          //- --▽-- todo 編輯 --▽--
+                          //- 如果不是編輯模式 顯示
+                          span(v-if='!Litem.edit')
+                            //- 編輯
+                            b-btn(variant="primary" @click='editlist(idx)').rounded-circle.px-1.py-0
+                              font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
+                            //- 移除
+                            b-btn(variant="primary" @click='dellist(idx)').rounded-circle.px-1.py-0.actionBtn
+                              img(:src='require("../assets/img/action-remove.png")')
+                          //- 如果是編輯模式 顯示
+                          span(v-else)
+                            b-btn(variant="primary" @click='changelist(idx)').rounded-circle.px-1.py-0
+                              font-awesome-icon(:icon='["fas", "check"]').btn-font
+                            b-btn(variant="primary" @click='cancellist(idx)').rounded-circle.px-1.py-0
+                              font-awesome-icon(:icon='["fas", "undo"]').btn-font
+                          //- --△-- todo 編輯 --△--
+                          //- 上移
+                          //- b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                          //-   img(:src='require("../assets/img/action-arrow-up.png")')
+                          //- 下移
+                          //- b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                          //-   img(:src='require("../assets/img/action-arrow-down.png")')
+                          //- 移至番茄鐘倒數
+                          b-btn(variant="primary" @click='chooselist(idx)' to='/home/pomodoro').rounded-circle.px-1.py-0.actionBtn
+                            img(:src='require("../assets/img/action-log-out.png")')
+                  b-tab(title='Done')
+                    //- h1.my-2 Done
+                    b-table-simple(table-variant="primary").bg-transparent.text-secondary
+                      tr(v-for='(item, idx) in done' :key='idx')
+                        td.w-75 {{ item.todo }}
+                          br
+                          span {{ timesDotCalc(item.times) }}
+                        td.w-25 {{ DateCalc(item.finishedDate) }}
+        b-col(cols='12' lg='5').p-3.text-right
           //- h1.mb-2.text-left 新增事項
           b-form(@submit.prevent="additem")
             //- b-form
@@ -98,10 +102,6 @@
               //- close-button
               //- label-close-button='關閉'
             b-btn(type='submit' variant="secondary").taskBtn Add task
-            //- input(type='submit' label="Add task" variant="secondary" @click='additem').taskBtn
-          div.mt-3.text-center
-            p.text-mute.font-listnone.my-5 Let’s start something fun
-            img(:src='require("../assets/img/deco-fun.png")').img-deco
 </template>
 
 <script>
@@ -155,6 +155,13 @@ export default {
     },
     finished () {
       return this.$store.state.finished
+    },
+    done () {
+      // 針對 list 目前的狀態，去產生新的列表迴圈
+      // .filter  =  for of
+      return this.list.filter(function (item) {
+        return item.check === true
+      })
     }
   },
   methods: {
@@ -192,11 +199,14 @@ export default {
     },
     cancellist (index) {
       this.$store.commit('canceLlist', index)
+    },
+    chooselist (index) {
+      this.$store.commit('chooselist', index)
     }
     // delfinish (index) {
-      // console.log(this)
-      // console.log(index)
-      // this.$store.commit('delFinish', index)
+    // console.log(this)
+    // console.log(index)
+    // this.$store.commit('delFinish', index)
     // }
   }
 }

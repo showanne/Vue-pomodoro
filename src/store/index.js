@@ -19,6 +19,7 @@ export default new Vuex.Store({
     soundOn: true,
     // 今天
     // today: new Date().toLocaleDateString('zh-tw'),
+    list_id: 0,
     // 待辦清單
     list: [],
     // 完成清單，list 完成的資料會移入此
@@ -102,6 +103,12 @@ export default new Vuex.Store({
       state.list[data].todoEdit = state.list[data].todo
       state.list[data].edit = false
     },
+    chooselist (state, data) {
+      state.current = state.list[data].todo
+      state.list_id = data
+      state.timeleft = time
+      state.isBreak = false
+    },
     // 按 > 開始按鈕時機
     startTodo (state) {
       // 休息狀態判斷
@@ -113,7 +120,7 @@ export default new Vuex.Store({
       } else {
         // 不是休息時間 開始時，將 list 的第一筆(.shift() )放入
         // state.current = state.list.shift().todo
-        state.current = state.list[0].todo
+        state.current = state.list[state.list_id].todo
         // 開始時 要加入背景圖片判斷
         state.imgCountdown = 'deco-target.png'
       }
@@ -130,9 +137,11 @@ export default new Vuex.Store({
     addFinish (state) {
       // 判斷不是休息時間，再將 state.current 放入 finished ，否則 'Time to Take a break' 也會被放入完成清單
       if (!state.isBreak) {
-        state.list[0].check = true
+        state.list[state.list_id].check = true
         // 完成時，在清單新增完成待辦事項的日期
-        state.list[0].finishedDate = 0
+        state.list[state.list_id].finishedDate = 0
+        // 讓倒數順序繼續
+        state.list_id++
       }
       // 結束後，沒有待辦事項時，顯示 'unknown task'
       // if (state.list.length = 0) {
@@ -158,16 +167,16 @@ export default new Vuex.Store({
     // 將已完成的待辦 放進表格
     // delFinish (state, data) {
     //   state.finished.splice(data, 1)
-      // state.finished.push({
-      // 完成的待辦事項
-      // done: state.finished.splice(data, 1)
-      // 完成待辦事項的日期
-      // date: new Date().toLocaleDateString('zh-tw')
-      // })
+    // state.finished.push({
+    // 完成的待辦事項
+    // done: state.finished.splice(data, 1)
+    // 完成待辦事項的日期
+    // date: new Date().toLocaleDateString('zh-tw')
+    // })
     // }
     // 計算 Pomodoro 次數
     timesCalc (state) {
-      state.list[0].times++
+      state.list[state.list_id].times++
     }
   },
   // 獲取資料的 function，getters 可以先處理好 function ，再 return 出來，不用外面再處理一次
