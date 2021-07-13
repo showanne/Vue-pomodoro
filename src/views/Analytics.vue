@@ -23,18 +23,20 @@
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
-                    p.pl-4 Pomodoros : {{ list[0].times }}
+                    p.pl-4 Pomodoros : {{ timesPomodoro }}
                     p.pl-4 Tasks : {{ list.length }}
-                    p.pl-4 Completed : {{ list.length }}
-                    p.pl-4 Focus time : {{ list.length * 25 }}m
+                    p.pl-4 Completed : {{ timesComplete }}
+                    p.pl-4 Focus time :
+                      span.lp6 {{ timeCalc(timesPomodoro * 25) }}
                   b-col(cols='12' lg='8').px-5
-                    b-table-simple(table-variant="primary").bg-transparent.text-secondary
+                    b-table-simple.mt-lg-5.mt-3(table-variant="primary").bg-transparent.text-secondary
                         tr(v-for='(item, idx) in list' :key='idx')
                           td
                             span {{ item.todo }}
+                            span(v-if='item.check').text-mute.border-mute.border.rounded.py-1.px-2.ml-3 Completed
                             br
                             span {{ timesDotCalc(list[idx].times) }}
-                          td {{ timesMinCalc(item.todo.length) }}min
+                          td.text-right.pr-5.lp6 {{ timeCalc(timesMinCalc(list[idx].times)) }}
                           //- {{ item.length }}
               b-tab(title='Weekly')
                 //- | AnalyticsWeekly
@@ -205,11 +207,27 @@ export default {
     list () {
       // console.log(this.$store.state.list.length)
       return this.$store.state.list
+    },
+    timesPomodoro () {
+      // 次數-做了幾次番茄鐘
+      // Analytics 頁面 Today 的 Pomodoro 值
+      const tPf = this.list.filter(function (item) {
+        return item.times > 0
+      })
+      const tPm = tPf.map((item) => {
+        return item.times
+      })
+      const reducer = (accumulator, currentValue) => accumulator + currentValue
+      return tPm.reduce(reducer)
+    },
+    timesComplete () {
+      // 次數-當天有幾個待辦事項
+      // Analytics 頁面 Today 的 complete 值
+      const tC = this.list.filter(function (item) {
+        return item.check === true
+      })
+      return tC.length
     }
-    // finished () {
-    //   // console.log(this.$store.state.finished.length)
-    //   return this.$store.state.finished
-    // }
   },
   methods: {
     DateChart (c) {
@@ -221,6 +239,14 @@ export default {
       return (date.getMonth() + 1) +
       ' / ' +
       date.getDate().toLocaleString(undefined, { minimumIntegerDigits: 2 })
+    },
+    timeCalc (T) {
+      // 幾小時
+      const hour = Math.floor(parseInt(T) / 60) > 0 ? Math.floor(parseInt(T) / 60) + 'h' : ''
+      // 幾分， % 取餘數
+      const min = Math.floor(parseInt(T) % 60) > 0 ? Math.floor(parseInt(T) % 60).toLocaleString(undefined, { minimumIntegerDigits: 2 }) + 'm' : ''
+
+      return `${hour}${min}`
     }
   }
 
