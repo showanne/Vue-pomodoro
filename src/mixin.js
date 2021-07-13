@@ -17,19 +17,25 @@
 
 export default {
   methods: {
-    formatDate () {
-      return new Date().getFullYear() + '-' +
-      (new Date().getMonth() + 1).toLocaleString(undefined, { minimumIntegerDigits: 2 }) + '-' +
-      new Date().getDate().toLocaleString(undefined, { minimumIntegerDigits: 2 })
-    },
-    Date (d) {
-      const date = new Date(new Date().getTime() - d * 24 * 3600 * 1000)
-      const year = date.getFullYear()
-      const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)
-      const day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate()
-      const dateNum = year + '-' + month + '-' + day
-      console.log(dateNum)
-      return dateNum
+    // formatDate () {
+    //   return new Date().getFullYear() +
+    //   '-' +
+    //   (new Date().getMonth() + 1).toLocaleString(undefined, { minimumIntegerDigits: 2 }) +
+    //   '-' +
+    //   new Date().getDate().toLocaleString(undefined, { minimumIntegerDigits: 2 })
+    // },
+    DateCalc (d) {
+      const date = new Date(new Date().getTime() + d * 24 * 3600 * 1000)
+      // const year = date.getFullYear()
+      // const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)
+      // const day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate()
+      // const dateNum = year + '-' + month + '-' + day
+      // console.log(dateNum)
+      return date.getFullYear() +
+      '-' +
+      (date.getMonth() + 1).toLocaleString(undefined, { minimumIntegerDigits: 2 }) +
+      '-' +
+      date.getDate().toLocaleString(undefined, { minimumIntegerDigits: 2 })
     }
   }
 }

@@ -19,7 +19,7 @@
                     p.pl-2.align-baseline
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-left.png")')
-                      span.font-weight-bold.px-3 {{ formatDate(today) }}
+                      span.font-weight-bold.px-3 {{ DateCalc(dToday) }}
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
@@ -43,7 +43,7 @@
                     p.pl-2
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-left.png")')
-                      | 2021-06-23~2021/07/23
+                      | {{ DateCalc(dWeekStart) }} ~ {{ DateCalc(dWeekEnd) }}
                       b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                         img(:src='require("../assets/img/action-arrow-right.png")')
                     hr.bg-secondary.hr-analytics
@@ -58,17 +58,21 @@
 
 <script>
 export default {
-  name: 'AnalyticsWeekly',
+  name: 'Analytics',
   data () {
     return {
-      // today: new Date().toLocaleDateString('zh-tw').Format('yyyy-MM-dd'),
+      dToday: 0,
+      dWeekStart: -3,
+      dWeekEnd: 3,
+      // 長條圖的值 series.data  X軸的值 xaxis.categories
       series: [
         {
           name: 'WeeklyChart',
-          // 若有 data 需搭配一個 categories (分類) ，共有3種寫法本次使用 2.3 版 - https://apexcharts.com/docs/series/
-          data: []
+          // data 及 categories 寫法 https://apexcharts.com/docs/series/
+          data: [3, 5, 1, 10, 5]
         }
       ],
+      // 長條圖
       chartOptions: {
         chart: {
           foreColor: '#CACEAC', // Y 軸字的顏色
@@ -90,7 +94,7 @@ export default {
         plotOptions: {
           bar: {
             horizontal: false,
-            columnWidth: '55%',
+            columnWidth: '39%',
             endingShape: 'rounded'
           }
         },
@@ -108,16 +112,35 @@ export default {
         },
         // X 軸的值
         xaxis: {
-          // 若有 data 需搭配一個 categories (分類) ，共有3種寫法本次使用 2.3 版 - https://apexcharts.com/docs/series/
-          categories: [],
+          type: 'date',
+          categories: [
+            this.DateChart(-2),
+            this.DateChart(-1),
+            this.DateChart(0),
+            this.DateChart(1),
+            this.DateChart(2)
+          ],
           labels: {
+            minHeight: 28,
+            maxHeight: 99,
             style: {
               fontSize: '20px',
               // lineHeight: '23px',
               fontFamily: 'Arimo',
               fontWeight: 'normal',
               colors: '#CACEAC' // X 軸字的顏色
-            }
+            },
+            offsetX: 0,
+            offsetY: 2
+            // format: 'MM/dd',
+            // formatter: undefined,
+            // datetimeUTC: true
+            // datetimeFormatter: {
+            // year: 'yyyy',
+            // month: 'MM',
+            // day: 'dd'
+            // hour: 'HH:mm'
+            // }
           },
           axisBorder: { // 長條圖 X 軸邊框設定
             show: true,
@@ -206,20 +229,18 @@ export default {
         Min += 25
       }
       return Min
+    },
+    DateChart (c) {
+      // const T = this.dToday
+      // console.log(T)
+      // console.log(typeof T)
+      const date = new Date(new Date().getTime() + (0 + c) * 24 * 3600 * 1000)
+
+      return (date.getMonth() + 1) +
+      ' / ' +
+      date.getDate().toLocaleString(undefined, { minimumIntegerDigits: 2 })
     }
   }
-  // ,
-  // async mounted () {
-  //   try {
-  //     const { data } = await this.axios.get('')
-  //     this.series[0].data = data.result.map(item => {
-  //       return { y: item.times, x: item.date }
-  //       // y 軸 暫時以 times 替代去看資料，再研究要不要在資料庫新增 timesPomodoro 欄位
-  //     })
-  //     // 若有 data 需搭配一個 categories (分類) ，共有3種寫法本次使用 2.3 版 - https://apexcharts.com/docs/series/
-  //   } catch (error) {
-  //     alert(error)
-  //   }
-  // }
+
 }
 </script>
