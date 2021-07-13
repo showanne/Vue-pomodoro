@@ -24,12 +24,14 @@
                 span {{ timesDotCalc(Litem.times) }}
               td {{ DateCalc(Litem.date) }}
               td {{ Litem.deadline }}
-              td.w-25
-                //- 編輯
+              td.w-25.text-right
+                //- --▽-- todo 編輯 --▽--
                 //- 如果不是編輯模式 顯示
                 span(v-if='!Litem.edit')
+                  //- 編輯
                   b-btn(variant="primary" @click='editlist(idx)').rounded-circle.px-1.py-0
                     font-awesome-icon(:icon='["fas", "pen"]').btn-font.text-secondary
+                  //- 移除
                   b-btn(variant="primary" @click='dellist(idx)').rounded-circle.px-1.py-0.actionBtn
                     img(:src='require("../assets/img/action-remove.png")')
                 //- 如果是編輯模式 顯示
@@ -38,9 +40,7 @@
                     font-awesome-icon(:icon='["fas", "check"]').btn-font
                   b-btn(variant="primary" @click='cancellist(idx)').rounded-circle.px-1.py-0
                     font-awesome-icon(:icon='["fas", "undo"]').btn-font
-                //- 移除
-                b-btn(variant="primary" @click='delfinish(idx)').rounded-circle.px-1.py-0.actionBtn
-                  img(:src='require("../assets/img/action-remove.png")')
+                //- --△-- todo 編輯 --△--
                 //- 上移
                 b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
                   img(:src='require("../assets/img/action-arrow-up.png")')
