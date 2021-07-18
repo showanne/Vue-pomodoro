@@ -1,61 +1,67 @@
 <template lang="pug">
   #analytics
     b-container.min-vh-100
-        b-row
-          b-col(cols='12')
-            b-tabs(
-              active-nav-item-class='font-weight-bold text-capitalize text-secondary bg-transparent'
-              active-tab-class='text-secondary bg-transparent'
-              content-class='mt-5' pills)
-              //- active-nav-item-class='' 上方分頁標籤樣式
-              //- active-tab-class='' 內容區樣式
-              //- content-class='' 分頁標籤與內容區的間距
-              //- mt-5 -> 3rem；設計稿是3.5rem = 57px
-              b-tab(title='analytics' disabled).mr-auto.font-analytics
-              b-tab(title='Today')
-                //- | AnalyticsToday
-                b-row
-                  b-col(cols='12' lg='4').pr-3
-                    p.pl-2.align-baseline
-                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                        img(:src='require("../assets/img/action-arrow-left.png")')
-                      span.font-weight-bold.px-3 {{ DateCalc(dToday) }}
-                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                        img(:src='require("../assets/img/action-arrow-right.png")')
-                    hr.bg-secondary.hr-analytics
-                    p.pl-4 Pomodoros : {{ timesPomodoro }}
-                    p.pl-4 Tasks : {{ list.length }}
-                    p.pl-4 Completed : {{ timesComplete }}
-                    p.pl-4 Focus time :
-                      span.lp6 {{ timeCalc(timesPomodoro * 25) }}
-                  b-col(cols='12' lg='8').px-5
-                    b-table-simple.mt-lg-5.mt-3(table-variant="primary").bg-transparent.text-secondary
-                        tr(v-for='(item, idx) in list' :key='idx')
-                          td
-                            span {{ item.todo }}
-                            span(v-if='item.check').text-mute.border-mute.border.rounded.py-1.px-2.ml-3 Completed
-                            br
-                            span {{ timesDotCalc(list[idx].times) }}
-                          td.text-right.pr-5.lp6 {{ timeCalc(timesMinCalc(list[idx].times)) }}
-                          //- {{ item.length }}
-              b-tab(title='Weekly')
-                //- | AnalyticsWeekly
-                b-row
-                  b-col(cols='12' lg='4').pr-3
-                    p.pl-2
-                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                        img(:src='require("../assets/img/action-arrow-left.png")')
-                      | {{ DateCalc(dWeekStart) }} ~ {{ DateCalc(dWeekEnd) }}
-                      b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
-                        img(:src='require("../assets/img/action-arrow-right.png")')
-                    hr.bg-secondary.hr-analytics
-                    p.pl-4 Pomodoros : 46
-                    p.pl-4 Tasks : 15
-                    p.pl-4 Completed : 7
-                    p.pl-4 Focus time : 19h10m
-                  b-col(cols='12' lg='8').px-5
-                    #chart
-                      apexchart(type='bar' width='550' :options='chartOptions' :series='series')
+      b-row
+        b-col(cols='12').p-3
+          h1.font-analytics.mb-2 Analytics
+      b-row
+        b-col(cols='12')
+          div(v-if='this.list.length===0').mt-3.text-center
+            p.text-mute.font-listnone.my-5 Let’s start something fun
+            img(:src='require("../assets/img/deco-fun.png")').img-deco
+          b-tabs( v-else align='center'
+            active-nav-item-class='font-weight-bold text-capitalize text-secondary bg-transparent'
+            active-tab-class='text-secondary bg-transparent'
+            content-class='mt-3' pills)
+            //- active-nav-item-class='' 上方分頁標籤樣式
+            //- active-tab-class='' 內容區樣式
+            //- content-class='' 分頁標籤與內容區的間距
+            //- mt-5 -> 3rem；設計稿是3.5rem = 57px
+            //- b-tab(title='analytics' disabled).mr-auto.font-analytics
+            b-tab(title='Today')
+              //- | AnalyticsToday
+              b-row
+                b-col(cols='12' lg='4').pr-3
+                  p.pl-2.align-baseline
+                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                      img(:src='require("../assets/img/action-arrow-left.png")')
+                    span.font-weight-bold.px-3 {{ DateCalc(dToday) }}
+                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                      img(:src='require("../assets/img/action-arrow-right.png")')
+                  hr.bg-secondary.hr-analytics
+                  p.pl-4 Pomodoros : {{ timesPomodoro }}
+                  p.pl-4 Tasks : {{ list.length }}
+                  p.pl-4 Completed : {{ timesComplete }}
+                  p.pl-4 Focus time :
+                    span.lp6 {{ timeCalc(timesPomodoro * 25) }}
+                b-col(cols='12' lg='8').px-5
+                  b-table-simple.mt-lg-5.mt-3(table-variant="primary").bg-transparent.text-secondary
+                      tr(v-for='(item, idx) in list' :key='idx')
+                        td
+                          span {{ item.todo }}
+                          span(v-if='item.check').text-mute.border-mute.border.rounded.py-1.px-2.ml-3 Completed
+                          br
+                          span {{ timesDotCalc(list[idx].times) }}
+                        td.text-right.pr-5.lp6 {{ timeCalc(timesMinCalc(list[idx].times)) }}
+                        //- {{ item.length }}
+            b-tab(title='Weekly')
+              //- | AnalyticsWeekly
+              b-row
+                b-col(cols='12' lg='4').pr-3
+                  p.pl-2
+                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                      img(:src='require("../assets/img/action-arrow-left.png")')
+                    | {{ DateCalc(dWeekStart) }} ~ {{ DateCalc(dWeekEnd) }}
+                    b-btn(variant="primary" @click='').rounded-circle.px-1.py-0.actionBtn
+                      img(:src='require("../assets/img/action-arrow-right.png")')
+                  hr.bg-secondary.hr-analytics
+                  p.pl-4 Pomodoros : 46
+                  p.pl-4 Tasks : 15
+                  p.pl-4 Completed : 7
+                  p.pl-4 Focus time : 19h10m
+                b-col(cols='12' lg='8').px-5
+                  #chart
+                    apexchart(type='bar' width='550' :options='chartOptions' :series='series')
 </template>
 
 <script>

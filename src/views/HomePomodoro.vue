@@ -1,8 +1,8 @@
 <template lang="pug">
   #homePomodoro
     b-container.vh-100
-      b-row
-        b-col(cols='12' lg='8').d-flex.justify-content-center.align-items-center.flex-column
+      b-row.flex-column-reverse.flex-md-row
+        b-col(cols='12' md='8').d-flex.justify-content-center.align-items-center.flex-column
           //- h1 倒計時文字
           h1.my-5.align-middle.font-countdown {{ timeText }}
           .button.my-3
@@ -19,12 +19,11 @@
               font-awesome-icon(:icon='["fas", "stop"]').text-secondary.btn-font
               //- br
               //- font-awesome-icon(:icon='["fas", "play-circle"]').text-secondary.btn-font
-        b-col(cols='12' lg='4')
+        b-col(cols='12' md='4')
           //- 待辦
           h1.font-current {{ current }}
-          //- 開始時 要加入背景圖片判斷
-          img(:src='require("../assets/img/" + imgCountdown)').img-deco
-          //- 手機板會爆掉 待調整
+          //- FIXED:手機板會爆掉 待調整
+          img(:src='require("../assets/img/" + imgCountdown)').img-deco.d-none.d-md-inline-block
 </template>
 
 <script>

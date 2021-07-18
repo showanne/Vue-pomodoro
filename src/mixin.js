@@ -11,9 +11,13 @@ export default {
     timesDotCalc (D) {
       // console.log(D)
       let dot = ''
-      for (let i = 1; i <= D; i++) {
-        // console.log(i)
-        dot += '●'
+      if (D > 0) {
+        for (let i = 1; i <= D; i++) {
+          // console.log(i)
+          dot += '●'
+        }
+      } else {
+        dot = '○'
       }
       return dot
     },

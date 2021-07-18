@@ -1,24 +1,25 @@
 <template lang="pug">
   #list
     b-container.min-vh-100
+      b-row
+        b-col(cols='12').p-3
+          h1.font-analytics.mb-2 Todo List
       b-row.flex-column-reverse.flex-lg-row
         b-col(cols='12' lg='7').p-3
-          b-tabs(
+          div(v-if='this.list.length===0').mt-3.text-center
+                      p.text-mute.font-listnone.my-5 Let’s start something fun
+                      img(:src='require("../assets/img/deco-fun.png")').img-deco
+          b-tabs( v-else align='right'
                   active-nav-item-class='font-weight-bold text-capitalize text-secondary bg-transparent'
                   active-tab-class='text-secondary bg-transparent'
                   content-class='mt-5' pills)
                   //- active-nav-item-class='' 上方分頁標籤樣式
                   //- active-tab-class='' 內容區樣式
                   //- content-class='' 分頁標籤與內容區的間距
-                  //- mt-5 -> 3rem；設計稿是 ?rem = ?px
-                  b-tab(title='Todo List' disabled).mr-auto.font-analytics
                   b-tab(title='Todo')
-                    //- h1.mb-2 Todo
-                    div(v-if='this.list.length===0').mt-3.text-center
-                      p.text-mute.font-listnone.my-5 Let’s start something fun
-                      img(:src='require("../assets/img/deco-fun.png")').img-deco
                     b-table-simple(table-variant="primary").bg-transparent.text-secondary
-                      tr(v-for='(Litem, idx) in list' :key='idx')
+                      //- 還沒做的待辦事項欄位為 task，todo 被用掉了
+                      tr(v-for='(Litem, idx) in task' :key='idx')
                         td
                           input(type='radio' v-model='Litem.check' @click='complete(idx)')
                         td.w-50
@@ -34,7 +35,8 @@
                           span(v-else) {{ Litem.todo }}
                           br
                           span {{ timesDotCalc(Litem.times) }}
-                        td {{ DateCalc(Litem.date) }}
+                        //- td {{ DateCalc(Litem.date) }}
+                        //- FIXED: 重開網頁日期會都跳成今天，不會被儲存
                         td {{ Litem.deadline }}
                         td.w-25.text-center
                           //- --▽-- todo 編輯 --▽--
@@ -155,6 +157,13 @@ export default {
     },
     finished () {
       return this.$store.state.finished
+    },
+    task () {
+      // 針對 list 目前的狀態，去產生新的列表迴圈
+      // .filter  =  for of
+      return this.list.filter(function (item) {
+        return item.check === false
+      })
     },
     done () {
       // 針對 list 目前的狀態，去產生新的列表迴圈
