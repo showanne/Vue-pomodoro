@@ -1,5 +1,7 @@
 <template lang="pug">
   #list
+    //- FIXED: 有時剛新增的或已完成的待辦不會即時更新在 analytics
+    //- TODO: 判斷若 times = 0 不能按 check
     b-container.min-vh-100
       b-row
         b-col(cols='12').p-3
@@ -7,8 +9,8 @@
       b-row.flex-column-reverse.flex-lg-row
         b-col(cols='12' lg='7').p-3
           div(v-if='this.list.length===0').mt-3.text-center
-                      p.text-mute.font-listnone.my-5 Let’s start something fun
-                      img(:src='require("../assets/img/deco-fun.png")').img-deco
+            p.text-mute.font-listnone.my-5 Let’s start something fun
+            img(:src='require("../assets/img/deco-fun.png")').img-deco
           b-tabs( v-else align='right'
                   active-nav-item-class='font-weight-bold text-capitalize text-secondary bg-transparent'
                   active-tab-class='text-secondary bg-transparent'
@@ -17,6 +19,7 @@
                   //- active-tab-class='' 內容區樣式
                   //- content-class='' 分頁標籤與內容區的間距
                   b-tab(title='Todo')
+                    //- TODO:表格的第一條槓槓
                     b-table-simple(table-variant="primary").bg-transparent.text-secondary
                       //- 還沒做的待辦事項欄位為 task，todo 被用掉了
                       tr(v-for='(Litem, idx) in task' :key='idx')

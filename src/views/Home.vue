@@ -1,5 +1,6 @@
 <template lang="pug">
   #home
+    //- TODO: 判斷若有代辦事項在跑，不顯示 'Start Pomodoro' 和 'Choose Task' 按鈕，直接跳到數頁
     .bellcontrol.d-none.d-sm-inline-block
       img(:src='require("../assets/img/bell.png")').align-middle
       .checkBell.d-inline-block.align-middle

@@ -45,6 +45,7 @@
                         td.text-right.pr-5.lp6 {{ timeCalc(timesMinCalc(list[idx].times)) }}
                         //- {{ item.length }}
             b-tab(title='Weekly')
+              //- TODO:抓周資料呈現在表格
               //- | AnalyticsWeekly
               b-row
                 b-col(cols='12' lg='4').pr-3
@@ -72,6 +73,7 @@ export default {
       dToday: 0,
       dWeekStart: -3,
       dWeekEnd: 3,
+      // TODO:抓周資料呈現在表格，目前是假資料
       // 長條圖的值 series.data  X軸的值 xaxis.categories
       series: [
         {
